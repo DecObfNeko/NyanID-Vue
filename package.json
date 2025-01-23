@@ -22,11 +22,7 @@
     "@types/node": "^20.14.5",
     "@vitejs/plugin-vue": "^5.0.5",
     "@vue/tsconfig": "^0.5.1",
-<<<<<<< HEAD
     "daisyui": "^5.0.0-beta.2",
-=======
-    "daisyui": "^5.0.0-beta.1",
->>>>>>> 2728010303035b08f107b292847bcd5a3e1500ae
     "npm-run-all2": "^6.2.0",
     "typescript": "~5.4.0",
     "vite": "^5.3.1",

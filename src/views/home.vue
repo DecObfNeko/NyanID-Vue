@@ -1,61 +1,88 @@
 <template>
+<header>
   <div class="navbar bg-base-100 shadow-sm">
     <div class="navbar-start">
-      <div class="dropdown">
-        <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-5 w-5"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor">
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M4 6h16M4 12h8m-8 6h16" />
-          </svg>
+      <a class="flex-0.5 btn btn-ghost px-3 h-13">
+        <div class="avatar">
+          <div class="w-10 rounded">
+            <img src="@/assets/img/logo.png" />
+          </div>
         </div>
-        <ul
-          tabindex="0"
-          class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-          <li><a>Item 1</a></li>
-          <li>
-            <details>
-              <summary>Parent</summary>
-              <ul class="p-2">
-                <li><a>Submenu 1</a></li>
-                <li><a>Submenu 2</a></li>
-              </ul>
-            </details>
-          </li>
-          <li><a>Item 3</a></li>
-        </ul>
-      </div>
-      <a class="btn btn-ghost text-xl">NyaCat</a>
+        <div class="font-title inline-flex text-lg md:text-2xl">NyaCat Cloud</div>
+      </a>
+    </div>
+
+    <div class="navbar-center hidden lg:flex">
+      <ul class="menu menu-horizontal px-1">
+        <li><a>HOME</a></li>
+        <li><a>McServer</a></li>
+        <li>
+          <details>
+            <summary>API/应用程序接入</summary>
+            <ul class="p-2">
+              <li><a>开发者中心</a></li>
+              <li><a>API文档</a></li>
+            </ul>
+          </details>
+        </li>
+        <li>
+          <details>
+            <summary>LEADERBOARDS</summary>
+            <ul class="p-2">
+              <li><a>猫粮排行榜</a></li>
+              <li><a>Ranked</a></li>
+            </ul>
+          </details>
+        </li>
+        <li><a>NAMEMC</a></li>
+      </ul>
     </div>
     <div class="navbar-end">
       <a class="btn">Login</a>
     </div>
   </div>
+</header>
+<section id="section">
+</section>
 </template>
 
+<style>
+#section {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+</style>
+
 <script>
+import { ref, onMounted } from 'vue';
+
 export default {
-  data() {
-    return {
-      isClicked: false,
-      msg: 'Not Clicked',
+  setup() {
+    const imgUrl = ref('');
+
+    const randomImg = async () => {
+      let randomint = Math.floor(Math.random() * 31) + 1;
+      console.log(randomint);
+      try {
+        let m = await import(`@/assets/rimages/${randomint}.jpg`);
+        imgUrl.value = m.default;
+        document.getElementById('section').style.backgroundImage = `url(${imgUrl.value})`;
+      } catch (error) {
+        console.error('Failed to load image:', error);
+      }
     };
-  },
-  methods: {
-    is_click() {
-      this.isClicked = !this.isClicked;
-      this.msg = this.isClicked ? 'Clicked' : 'Not Clicked';
-    },
-  },
+
+    onMounted(() => {
+      randomImg();
+    });
+
+    return {
+    };
+  }
 };
 </script>
-
-<style scoped>
-</style>
