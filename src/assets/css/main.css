@@ -3,6 +3,8 @@
 
 /* 主题配置 */
 @plugin "daisyui/theme" {
+    exclude: rootscrollgutter, rootcolor;
+    themes: light --default, dark --prefersdark;
     name: "nord";
     default: false;
     prefersdark: false;
