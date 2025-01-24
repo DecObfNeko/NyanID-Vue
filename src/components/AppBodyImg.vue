@@ -17,7 +17,11 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
+import axios from 'axios';
 
+import config from '@/config/config';
+
+    /* 随机背景图片 */
     const imgUrl = ref('');
 
     const randomImg = async () => {
@@ -26,13 +30,31 @@ import { ref, onMounted } from 'vue';
       try {
         let m = await import(`../assets/rimages/${randomint}.jpg`);
         imgUrl.value = m.default;
-        document.getElementById('section').style.backgroundImage = `url(${imgUrl.value})`;
+        const sectionElement = document.getElementById('section');
+        if (sectionElement) {
+          sectionElement.style.backgroundImage = `url(${imgUrl.value})`;
+        }
       } catch (error) {
         console.error('Failed to load image:', error);
       }
     };
 
+    /* 请求 */
+    const getServerInfo = async () => {
+      try {
+        const res = await axios({
+          url: `${config.apiUrl}/api/zako/v2/server`,
+          method: 'get',
+        });
+        console.log(res);
+      } catch (error) {
+        console.error('Failed to fetch:', error);
+      }
+    };
+
+    /* 初始化 */
     randomImg();
+    getServerInfo();
 
 
 </script>
