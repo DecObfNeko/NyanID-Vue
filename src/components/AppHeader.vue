@@ -1,6 +1,6 @@
 <template>
     <header>
-      <div class="navbar bg-base-100 shadow-sm">
+      <div class="navbar bg-base-100 shadow-sm ">
         <div class="navbar-start">
           <a class="flex-0.5 btn btn-ghost px-3 h-13">
             <div class="avatar">
@@ -8,7 +8,7 @@
                 <img src="@/assets/img/logo.png" />
               </div>
             </div>
-            <div class="font-title inline-flex text-lg md:text-2xl">NyaCat Cloud</div>
+            <div class="font-title inline-flex text-lg md:text-2xl ">NyaCat Cloud</div>
           </a>
         </div>
     
