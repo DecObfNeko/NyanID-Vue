@@ -35,7 +35,7 @@
 <transition-group name="toast" tag="div">
     <div v-for="(toast, index) in toasts" :key="index" class="toast toast-end" @click="closeToast(index)">
       <div class="alert alert-info" @click="closeToast(index)">
-        <span class="footer-title">{{ clickmeg }}</span>
+        <span>{{ clickmeg }}</span>
       </div>
     </div>
   </transition-group>

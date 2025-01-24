@@ -1,10 +1,10 @@
 <template>
   <AppHeader #="body" html data-theme=""> 
     <router-view />
-  </AppHeader>
-     <AppBodyImg >
+  </AppHeader>  
+  <HomeView />
+     <AppBodyImg>
       </AppBodyImg>
-
   <AppFooter>
   </AppFooter>
 </template>
@@ -14,6 +14,7 @@
 import AppHeader from '@/components/AppHeader.vue';
 import AppBodyImg from '@/components/AppBodyImg.vue';
 import AppFooter from './components/AppFooter.vue';
+import HomeView from './views/home.vue';
 
 
 </script>

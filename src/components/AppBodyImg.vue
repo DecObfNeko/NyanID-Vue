@@ -1,6 +1,5 @@
 <template>
-<section id="section">
-</section>
+
 </template>
 
 <style>
