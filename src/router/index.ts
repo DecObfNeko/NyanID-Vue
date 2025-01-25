@@ -1,4 +1,5 @@
-import App from '@/App.vue'
+import LoginView from '@/views/LoginView.vue'
+import home from '@/views/home.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 
@@ -7,8 +8,25 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: App
+      name: 'Home',
+      component : home,
+      meta: { transition: 'fade-leave-active' },
+    },
+    {
+      path: '/login',
+      name: 'LoginView',
+      component: LoginView,
+      meta: { transition: 'fade-leave-active' },
+    },
+    {
+      path: '/findpwd',
+      name: 'ForgotPasswordView',
+      component: LoginView
+    },
+    {
+      path: '/register',
+      name: 'RegisterView',
+      component: LoginView
     }
   ]
 })

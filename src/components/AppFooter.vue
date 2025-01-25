@@ -22,10 +22,10 @@
   <div class="divider divider-horizontal"></div>
 
   <nav>
-    <h6 class="footer-title">Services</h6>
-    <a class="link link-hover">Branding</a>
-    <a class="link link-hover">Design</a>
-    <a class="link link-hover">Marketing</a>
+    <h6 class="footer-title">Services & Links</h6>
+    <a class="link link-hover">Join us</a>
+    <a class="link link-hover">Privacy Policy</a>
+    <a class="link link-hover">Terms of Service</a>
     <a class="link link-hover">Advertisement</a>
   </nav>
 
