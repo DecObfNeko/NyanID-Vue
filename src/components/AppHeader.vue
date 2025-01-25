@@ -14,7 +14,7 @@
 
       <div class="navbar-center hidden lg:flex ">
         <ul class="menu menu-horizontal px-1">
-          <li><RouterLink to="/">HOME</RouterLink></li>
+          <li><RouterLink to="/" >HOME</RouterLink></li>
           <li><a>McServer</a></li>
           <li>
             <details>

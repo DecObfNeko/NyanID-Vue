@@ -1,5 +1,6 @@
 <template>
-  <div id="section" class="hero min-h-screen">
+  <div>
+  <div class="hero  min-h-screen">
     <div class="hero-content flex-col lg:flex-row-reverse">
       <img src="@/assets/img/95146846_p0_trans.png" :class="['max-w-sm', { 'animate-fly-in': isMounted }]" />
       <div :class="[{ 'animate-fly-in': isMounted }]">
@@ -7,17 +8,12 @@
         <p class="py-6">
           由一群可爱的猫猫创建的工作室DecobfnekoDev
           MahiroHackerฅ(＞﹏＜) No Dimples#1337 here :
-        </p>
-        <div class="py-4">
+          <br>
           {{ serverInfo }}
-        </div>
+        </p>
         <button class="btn btn-primary">Get Started</button>
       </div>
-    </div>
-  </div>
-
-  
-  <div class="stats-container">
+      <div class="stats-container">
     <div class="stats shadow bg-white">
       <div class="stat place-items-center">
         <div class="stat-title">AllUser</div>
@@ -38,7 +34,12 @@
       </div>
     </div>
   </div>
+    </div>
+  </div>
+  </div>
+  
 </template>
+
 
 <style scoped>
 #section {
@@ -70,16 +71,10 @@
   padding: 20px; /* 可选：设置内边距 */
 }
 </style>
-
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-
 import axios from 'axios';
-
 import config from '@/config/configenv.d';
-
-// 创建一个响应式变量来控制动画
-const isMounted = ref(false)
 
 // 创建一个响应式变量来存储服务器信息
 const serverInfo = ref('');
@@ -107,10 +102,12 @@ const getServerInfo = async () => {
   }
 };
 
+// 创建一个响应式变量来控制动画
+const isMounted = ref(false)
+
 // 在组件挂载时设置 isMounted 为 true
-// 并请求服务器信息
 onMounted(() => {
-  isMounted.value = true;
-  getServerInfo();
-});
+  isMounted.value = true
+  getServerInfo()
+})
 </script>

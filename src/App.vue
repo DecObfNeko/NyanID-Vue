@@ -1,16 +1,6 @@
-<template html>     
+<template html> 
   <div class="base-300 dark:bg-base-300">
-    <router-view  mode="out-in" v-slot="{ Component }" >
-        <AppHeader #="body" html data-theme=""> 
-  </AppHeader>
-  <div id="section">
-  <transition name="fade" mode="out-in">
-    <component :is="Component" />
-  </transition>
-</div>
-  <AppFooter />
-</router-view>
-<transition-group name="toast" tag="div">
+    <transition-group name="toast" tag="div">
     <div v-for="(toast, index) in toasts" :key="index" class="toast toast-end" @click="closeToast(index)">
       <div :class="alertclass" @click="closeToast(index)">
          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-6 w-6 shrink-0 stroke-current">
@@ -20,6 +10,16 @@
       </div>
     </div>
   </transition-group>
+    <router-view  mode="out-in" v-slot="{ Component }" >
+      <AppHeader #="body" html data-theme=""> 
+      </AppHeader>
+    <div id="section">
+  <transition name="fade" mode="out-in">
+    <component :is="Component" />
+  </transition>
+    </div>
+  <AppFooter />
+</router-view>
 </div>
 </template>
 //把页面拆成一个个component和view然后在这里引入
@@ -27,7 +27,7 @@
 <script name="App" lang="ts" setup>
 import AppHeader from '@/components/AppHeader.vue';
 import AppFooter from '@/components/AppFooter.vue';
-import { ref, onMounted, vShow, toRefs, reactive } from 'vue';
+import { ref, onMounted, reactive } from 'vue';
 import axios from 'axios';
 import config from '@/config/configenv.d';
 
