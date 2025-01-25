@@ -20,7 +20,6 @@ import AppFooter from '@/components/AppFooter.vue';
     /* 初始化 */
     const initialize = async () => {
       await randomImg();
-      await getServerInfo();
       setTimeout(() => {
         console.log(`⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⡤⠶⠖⠒⠶⠶⠤⣄⣀⠀⠀⢀⠌⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⠃⢀⠀⠀⠀⠀⠀⠀⠀⠈⠙⢲⢮⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
@@ -45,16 +44,12 @@ import AppFooter from '@/components/AppFooter.vue';
 
 <script lang="ts">
 import { ref, onMounted, vShow } from 'vue';
-import axios from 'axios';
-
-import config from '@/config/configenv.d';
 
     /* 随机背景图片 */
     const imgUrl = ref('');
 
     const randomImg = async () => {
       let randomint = Math.floor(Math.random() * 31) + 1;
-      console.log(randomint);
       try {
         let m = await import(`@/assets/rimages/${randomint}.jpg`);
         imgUrl.value = m.default;
@@ -64,19 +59,6 @@ import config from '@/config/configenv.d';
         }
       } catch (error) {
         console.error('Failed to load image:', error);
-      }
-    };
-
-       /* 请求 */
-       const getServerInfo = async () => {
-      try {
-        const res = await axios({
-          url: `${config}/api/zako/v2/server`,
-          method: 'get',
-        });
-        console.log(res);
-      } catch (error) {
-        console.error('Failed to fetch:', error);
       }
     };
 
