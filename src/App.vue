@@ -90,7 +90,6 @@ function closeToast(id: number) {
 
     const randomImg = async () => {
       let randomint = Math.floor(Math.random() * 31) + 1;
-      console.log(randomint);
       try {
         let m = await import(`@/assets/rimages/${randomint}.jpg`);
         imgUrl.value = m.default;
