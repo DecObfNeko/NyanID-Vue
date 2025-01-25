@@ -3,7 +3,7 @@
     <div class="navbar shadow-sm" :class="navbarClass">
       <div class="navbar-start ">
         <RouterLink to="/" class="flex-0.5 btn btn-ghost px-3 h-13">
-          <div class="avatar">
+          <div class="avatar ">
             <div class="w-10 rounded">
               <img src="@/assets/img/logo.png" />
             </div>

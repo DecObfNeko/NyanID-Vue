@@ -1,31 +1,41 @@
-<template html id="section">
-    <router-view v-slot="{ Component }">
+<template html> 
+  <div class="base-300 dark:bg-base-300">
+    <router-view  mode="out-in" v-slot="{ Component }" >
         <AppHeader #="body" html data-theme=""> 
   </AppHeader>
-  <div id="section" mode="out-in">
+  <div id="section">
   <transition name="fade" mode="out-in">
     <component :is="Component" />
   </transition>
 </div>
-       <AppFooter />
+  <AppFooter />
 </router-view>
+</div>
 </template>
 //把页面拆成一个个component和view然后在这里引入
 
 <script name="App" lang="ts" setup>
 import AppHeader from '@/components/AppHeader.vue';
-import AppBodyImg from '@/components/AppBodyImg.vue';
-import AppFooter from './components/AppFooter.vue';
-import HomeView from './views/home.vue';
+import AppFooter from '@/components/AppFooter.vue';
+    /* 初始化 */
+    const initialize = async () => {
+      await randomImg();
+      await getServerInfo();
+      // 延迟900毫秒后设置 isLoading 为 false
+      setTimeout(() => {
+      }, 200);
+    };
 
-
+    onMounted(() => {
+      initialize();
+    });
 </script>
 
 <script lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, vShow } from 'vue';
 import axios from 'axios';
 
-import config from '@/config/config';
+import config from '@/config/config.ts';
 
     /* 随机背景图片 */
     const imgUrl = ref('');
@@ -45,9 +55,18 @@ import config from '@/config/config';
       }
     };
 
-    /* 初始化 */
-    randomImg();
-
+       /* 请求 */
+       const getServerInfo = async () => {
+      try {
+        const res = await axios({
+          url: `${config}/api/zako/v2/server`,
+          method: 'get',
+        });
+        console.log(res);
+      } catch (error) {
+        console.error('Failed to fetch:', error);
+      }
+    };
 
 </script>
 
@@ -56,6 +75,7 @@ import config from '@/config/config';
 #section {
   background-size: cover;
   background-position: center;
+  background-attachment: fixed;
   background-repeat: no-repeat;
   height: 100vh;
   display: flex;
@@ -65,13 +85,33 @@ import config from '@/config/config';
 </style>
 
 <style>
-.fade-enter-active,
+.fade-enter-active {
+  transition: opacity 0.3s ease;
+  opacity: 1;
+  transform: translateY(0);
+  border: none;
+
+}
 .fade-leave-active {
-  transition: opacity 0.5s ease;
+  transition: opacity 0.3s ease;
+  opacity: 0;
+  transform: translateZ(90px);
+  border: none;
+  background-color: transparent;
 }
 
-.fade-enter-from,
+.fade-enter-from {
+  transition: opacity 0.5s ease;
+  opacity: 0;
+  transform: translateY(80px);
+  transition-timing-function: ease-in-out;
+}
 .fade-leave-to {
   opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 0.5s ease;
+  transition-timing-function: ease-out;
+  transition-property: opacity, transform;
+  border: none;
 }
 </style>

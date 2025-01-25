@@ -1,5 +1,5 @@
 <template>
-<footer class="footer sm:footer-horizontal bg-base-200 text-base-content p-10 glass ">
+<footer class="footer sm:footer-horizontal text-base-content p-10 glass">
   <aside>
     <img src="@/assets/img/logo.png" class="w-16" />
     <p class="footer-title">
@@ -35,7 +35,10 @@
 <transition-group name="toast" tag="div">
     <div v-for="(toast, index) in toasts" :key="index" class="toast toast-end" @click="closeToast(index)">
       <div class="alert alert-info" @click="closeToast(index)">
-        <span>{{ clickmeg }}</span>
+         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-6 w-6 shrink-0 stroke-current">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+         </svg>
+        <span>{{ clickmsg }}</span>
       </div>
     </div>
   </transition-group>
@@ -75,10 +78,10 @@ import { reactive, ref } from 'vue'
 const toasts = ref<Array<{ id: number, timer: ReturnType<typeof setTimeout> }>>([])
 
 let toastId = 0
-let clickmeg = ref()
+let clickmsg = ref()
 
 function ClickCat() {
-    clickmeg.value = "喵喵喵~"
+    clickmsg.value = "喵喵喵~"
 
 
   const id = toastId++

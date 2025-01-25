@@ -1,5 +1,5 @@
 <template>
-  <div class="hero  min-h-screen">
+  <div class="hero min-h-screen">
     <div class="hero-content flex-col lg:flex-row-reverse">
       <img src="@/assets/img/95146846_p0_trans.png" :class="['max-w-sm', { 'animate-fly-in': isMounted }]" />
       <div :class="[{ 'animate-fly-in': isMounted }]">
