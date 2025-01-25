@@ -1,5 +1,3 @@
-
-
 const config = {
     apiUrl: 'http://nyanid.cn:8080',
 };
