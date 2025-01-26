@@ -8,7 +8,7 @@
           <p class="py-6">
             由一群可爱的猫猫创建的工作室DecobfnekoDev MahiroHackerฅ(＞﹏＜) No Dimples#1337 here :
             <br>
-            <span v-if="serverInfoState" class="loading loading-ring loading-xl"  ></span>
+            <span v-if="NumberOfEventsState" class="loading loading-ring loading-xl"  ></span>
             <transition name="el-fade-in">
             <div   v-html="serverInfo" class="transition-box"></div>
             </transition>
@@ -34,7 +34,7 @@
 
             <div class="stat place-items-center w-90">
               <div class="stat-title">NumberOfEvents</div>
-              <span v-if="NumberOfEventsState" class="loading loading-ring loading-xl"></span>
+              <span v-if="AllApplicationState" class="loading loading-ring loading-xl"></span>
               <div class="stat-value">{{ NumberOfEvents }}</div>
               <div class="stat-desc">NumberOfEvents</div>
             </div>
