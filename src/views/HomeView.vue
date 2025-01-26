@@ -99,7 +99,7 @@ const getServerInfo = async () => {
 
       AllUserState.value = false;
       AllApplicationState.value = false;
-      NumberOfEventsState.value = false;
+      NumberOfEventsState.value = true;
     } else {
       serverInfo.value = 'Server is down!';
       AllUser.value = '0';
