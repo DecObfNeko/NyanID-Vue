@@ -1,15 +1,5 @@
-<template html> 
+<template html>
   <div class="base-300 dark:bg-base-300">
-    <transition-group name="toast" tag="div">
-    <div v-for="(toast, index) in toasts" :key="index" class="toast toast-end" @click="closeToast(index)">
-      <div :class="alertclass" @click="closeToast(index)">
-         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-6 w-6 shrink-0 stroke-current">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-         </svg>
-        <span>{{ msga }}</span>
-      </div>
-    </div>
-  </transition-group>
     <router-view  mode="out-in" v-slot="{ Component }" >
       <AppHeader #="body" html data-theme=""> 
       </AppHeader>
@@ -28,35 +18,7 @@
 import AppHeader from '@/components/AppHeader.vue';
 import AppFooter from '@/components/AppFooter.vue';
 import { ref, onMounted, reactive } from 'vue';
-import axios from 'axios';
-import config from '@/config/configenv.d';
 
-
-const toasts = ref<Array<{ id: number, timer: ReturnType<typeof setTimeout> }>>([])
-
-let toastId = 0
-let msga = ref()
-let alertclass = reactive(["alert","alert-info"])
-function Alert(msg:string,typea:string) {
-    msga.value = msg
-    Object.assign(alertclass, ["alert",typea]);
-
-  const id = toastId++
-  const timer = setTimeout(() => {
-    closeToast(id)
-  }, 1000) 
-
-
-  toasts.value.push({ id, timer })
-}
-
-function closeToast(id: number) {
-  const index = toasts.value.findIndex(toast => toast.id === id)
-  if (index !== -1) {
-    clearTimeout(toasts.value[index].timer)
-    toasts.value.splice(index, 1)
-  }
-}
     /* 初始化 */
     const initialize = async () => {
       await randomImg();
