@@ -8,11 +8,15 @@
           <p class="py-6">
             由一群可爱的猫猫创建的工作室DecobfnekoDev MahiroHackerฅ(＞﹏＜) No Dimples#1337 here :
             <br>
-            {{ serverInfo }}
+            <span v-if="NumberOfEventsState" class="loading loading-ring loading-xl"  ></span>
+            <transition name="el-fade-in">
+            <div   v-html="serverInfo" class="transition-box"></div>
+            </transition>
           </p>
           <button class="btn btn-primary">Get Started</button>
         </div>
-        <div class="stats-container">
+        <transition name="el-zoom-in-bottom">
+        <div class="stats-container transition-box" v-show="show" v-if="NumberOfEventsState" >
           <div class="stats shadow glass">
             <div class="stat place-items-center w-90">
               <div class="stat-title">AllUser</div>
@@ -36,6 +40,7 @@
             </div>
           </div>
         </div>
+        </transition>
       </div>
     </div>
   </div>
@@ -44,17 +49,6 @@
 
 
 <style scoped>
-#section {
-  width: 100%;
-  height: 100vh; /* 设置高度为视口高度 */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-size: cover;
-  background-position: center;
-}
-
 /* 数据看板容器 */
 .stats-container {
   position: absolute;
@@ -69,19 +63,26 @@
 import { ref, onMounted } from 'vue'
 import axios from 'axios';
 import config from '@/config/configenv.d';
+import { ElNotification } from 'element-plus'
 
 // 创建响应式变量来存储服务器信息
 const serverInfo = ref('');
 const AllUser = ref('');
 const AllApplication = ref('');
 const NumberOfEvents = ref('');
-
+const show = ref(true)
 const AllUserState = ref(true);
 const AllApplicationState = ref(true);
 const NumberOfEventsState = ref(true);
 
 
-
+function open(title:any,msg:any,type:any) {
+  ElNotification({
+    title: title,
+    message: msg,
+    type: type,
+  })
+}
 // 请求
 const getServerInfo = async () => {
   try {
@@ -110,11 +111,11 @@ const getServerInfo = async () => {
       NumberOfEventsState.value = false;
     }
   } catch (error) {
-    serverInfo.value = 'Server is down!';
+    serverInfo.value = '<p style="color: brown">Server is down!</p>';
     AllUser.value = '0';
     AllApplication.value = '0';
     NumberOfEvents.value = '0';
-
+    open('Error', 'Failed to fetch:'+error, 'error')
     AllUserState.value = false;
     AllApplicationState.value = false;
     NumberOfEventsState.value = false;

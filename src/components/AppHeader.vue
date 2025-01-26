@@ -12,16 +12,24 @@
         </RouterLink>
       </div>
 
-      <div class="navbar-center hidden lg:flex ">
+      <div class="navbar-center hidden lg:flex  ">
         <ul class="menu menu-horizontal px-1">
           <li><RouterLink to="/" >HOME</RouterLink></li>
           <li><a>McServer</a></li>
           <li>
-            <details>
+            <details class="dropdown dropdown-end">
               <summary>API/应用程序接入</summary>
-              <ul class="p-2">
-                <li><a>开发者中心</a></li>
-                <li><a>API文档</a></li>
+              <ul
+                  tabindex="0"
+                  class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow ">
+                <li>
+                  <a class="justify-between">
+                    Profile
+                    <span class="badge">New</span>
+                  </a>
+                </li>
+                <li><a>Settings</a></li>
+                <li><a>Logout</a></li>
               </ul>
             </details>
           </li>
