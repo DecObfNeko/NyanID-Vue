@@ -1,41 +1,43 @@
 <template>
   <div>
-  <div class="hero  min-h-screen">
-    <div class="hero-content flex-col lg:flex-row-reverse">
-      <img src="@/assets/img/95146846_p0_trans.png" :class="['max-w-sm', { 'animate-fly-in': isMounted }]" />
-      <div :class="[{ 'animate-fly-in': isMounted }]">
-        <h1 class="text-5xl font-bold">NyaCat Cloud</h1>
-        <p class="py-6">
-          由一群可爱的猫猫创建的工作室DecobfnekoDev
-          MahiroHackerฅ(＞﹏＜) No Dimples#1337 here :
-          <br>
-          {{ serverInfo }}
-        </p>
-        <button class="btn btn-primary">Get Started</button>
-      </div>
-      <div class="stats-container">
-    <div class="stats shadow bg-white">
-      <div class="stat place-items-center">
-        <div class="stat-title">AllUser</div>
-        <div class="stat-value text-secondary">{{ AllUser }}</div>
-        <div class="stat-desc text-secondary">I like this, this is Cute</div>
-      </div>
+    <div class="hero min-h-screen">
+      <div class="hero-content flex-col lg:flex-row-reverse">
+        <img src="@/assets/img/95146846_p0_trans.png" :class="['max-w-sm', { 'animate-fly-in': isMounted }]" />
+        <div :class="[{ 'animate-fly-in': isMounted }]">
+          <h1 class="text-5xl font-bold">NyaCat Cloud</h1>
+          <p class="py-6">
+            由一群可爱的猫猫创建的工作室DecobfnekoDev MahiroHackerฅ(＞﹏＜) No Dimples#1337 here :
+            <br>
+            {{ serverInfo }}
+          </p>
+          <button class="btn btn-primary">Get Started</button>
+        </div>
+        <div class="stats-container">
+          <div class="stats shadow glass">
+            <div class="stat place-items-center w-90">
+              <div class="stat-title">AllUser</div>
+              <span v-if="AllUserState" class="loading loading-ring loading-xl"></span>
+              <div class="stat-value text-secondary">{{ AllUser }}</div>
+              <div class="stat-desc text-secondary">AllUser</div>
+            </div>
 
-      <div class="stat place-items-center">
-        <div class="stat-title">AllApplication</div>
-        <div class="stat-value">{{ AllApplication }}</div>
-        <div class="stat-desc">↗︎ 40 (2%)</div>
-      </div>
+            <div class="stat place-items-center w-90">
+              <div class="stat-title">AllApplication</div>
+              <span v-if="AllApplicationState" class="loading loading-ring loading-xl"></span>
+              <div class="stat-value">{{ AllApplication }}</div>
+              <div class="stat-desc">AllApplication</div>
+            </div>
 
-      <div class="stat place-items-center">
-        <div class="stat-title">NumberOfEvents</div>
-        <div class="stat-value">{{ NumberOfEvents }}</div>
-        <div class="stat-desc">↘︎ 90 (14%)</div>
+            <div class="stat place-items-center w-90">
+              <div class="stat-title">NumberOfEvents</div>
+              <span v-if="NumberOfEventsState" class="loading loading-ring loading-xl"></span>
+              <div class="stat-value">{{ NumberOfEvents }}</div>
+              <div class="stat-desc">NumberOfEvents</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-    </div>
-  </div>
   </div>
   
 </template>
@@ -62,25 +64,22 @@
   justify-content: center;
   padding: 20px;
 }
-
-/* 数据看板样式 */
-.stats {
-  background-color: white; /* 设置背景颜色为白色 */
-  opacity: 1; /* 设置不透明 */
-  border-radius: 8px; /* 可选：设置圆角 */
-  padding: 20px; /* 可选：设置内边距 */
-}
 </style>
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import axios from 'axios';
 import config from '@/config/configenv.d';
 
-// 创建一个响应式变量来存储服务器信息
+// 创建响应式变量来存储服务器信息
 const serverInfo = ref('');
 const AllUser = ref('');
 const AllApplication = ref('');
 const NumberOfEvents = ref('');
+
+const AllUserState = ref(true);
+const AllApplicationState = ref(true);
+const NumberOfEventsState = ref(true);
+
 
 
 // 请求
@@ -88,17 +87,37 @@ const getServerInfo = async () => {
   try {
     const res = await axios({
       url: `${config}/api/zako/v2/server`,
-      method: 'GET'
+      method: 'GET',
+      timeout: 5000,
     });
-    serverInfo.value = 'Here is NyaCat Cloud!';
-    AllUser.value = res.data.AllUser;
-    AllApplication.value = res.data.AllApplication;
-    NumberOfEvents.value = res.data.NumberOfEvents;
+    if (res.status === 200) {
+      serverInfo.value = 'Here is NyaCat Cloud!';
+      AllUser.value = res.data.AllUser;
+      AllApplication.value = res.data.AllApplication;
+      NumberOfEvents.value = res.data.NumberOfEvents;
+
+      AllUserState.value = false;
+      AllApplicationState.value = false;
+      NumberOfEventsState.value = false;
+    } else {
+      serverInfo.value = 'Server is down!';
+      AllUser.value = '0';
+      AllApplication.value = '0';
+      NumberOfEvents.value = '0';
+
+      AllUserState.value = false;
+      AllApplicationState.value = false;
+      NumberOfEventsState.value = false;
+    }
   } catch (error) {
     serverInfo.value = 'Server is down!';
     AllUser.value = '0';
     AllApplication.value = '0';
     NumberOfEvents.value = '0';
+
+    AllUserState.value = false;
+    AllApplicationState.value = false;
+    NumberOfEventsState.value = false;
   }
 };
 

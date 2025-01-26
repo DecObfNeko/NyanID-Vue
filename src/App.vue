@@ -60,7 +60,6 @@ function closeToast(id: number) {
     /* 初始化 */
     const initialize = async () => {
       await randomImg();
-      await getServerInfo();
 
       setTimeout(() => {
         console.log(`⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⡤⠶⠖⠒⠶⠶⠤⣄⣀⠀⠀⢀⠌⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
@@ -99,22 +98,6 @@ function closeToast(id: number) {
         }
       } catch (error) {
         console.error('Failed to load image:', error);
-      }
-    };
-
-       /* 请求 */
-       const getServerInfo = async () => {
-      try {
-        const res = await axios({
-          url: `${config}/api/zako/v2/server`,
-          method: 'get',
-        });
-        Alert(res.data,"alert-info");
-
-        console.log(res);
-      } catch (error) {
-        Alert('Failed to fetch:'+error,"alert-error");
-        console.error('Failed to fetch:', error);
       }
     };
 
