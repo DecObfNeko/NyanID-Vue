@@ -61,8 +61,7 @@
 </style>
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import axios from 'axios';
-import config from '@/config/configenv.d';
+import { getServerInfo } from '@/api/serverInfo.d'
 import { ElNotification } from 'element-plus'
 
 // 创建响应式变量来存储服务器信息
@@ -84,40 +83,25 @@ function open(title:any,msg:any,type:any) {
     type: type,
   })
 }
-// 请求
-const getServerInfo = async () => {
-  try {
-    const res = await axios({
-      url: `${config}/api/zako/v2/server`,
-      method: 'GET',
-      timeout: 5000,
-    });
-    if (res.status === 200) {
-      serverInfo.value = 'Here is NyaCat Cloud!';
-      AllUser.value = res.data.AllUser;
-      AllApplication.value = res.data.AllApplication;
-      NumberOfEvents.value = res.data.NumberOfEvents;
+// 处理请求
+getServerInfo().then(res => {
+  console.log(res)
+  if (res.status === 200) {
+    serverInfo.value = 'Here is NyaCat Cloud';
 
-      serverInfoState.value = false;
-      AllUserState.value = false;
-      AllApplicationState.value = false;
-      NumberOfEventsState.value = false;
-    } else {
-      serverInfo.value = 'Server is down!';
+    AllUser.value = res.data.AllUser;
+    AllApplication.value = res.data.AllApplication;
+    NumberOfEvents.value = res.data.NumberOfEvents;
 
-      show.value = false;
-    }
-  } catch (error) {
-    serverInfo.value = '<p style="color: brown">Server is down!</p>'; 
-    open('Error', 'Failed to fetch:'+error, 'error')
-
-    show.value = false;
     serverInfoState.value = false;
     AllUserState.value = false;
     AllApplicationState.value = false;
     NumberOfEventsState.value = false;
+  } else {
+    show.value = false;
+    serverInfoState.value = false;
   }
-};
+})
 
 // 创建一个响应式变量来控制动画
 const isMounted = ref(false)
