@@ -1,5 +1,6 @@
 import LoginView from '@/views/LoginView.vue'
-import home from '@/views/home.vue'
+import HomeView from '@/views/HomeView.vue'
+import ForGotPwdView from '@/views/ForGotPwdView.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 
@@ -8,8 +9,8 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'Home',
-      component : home,
+      name: 'HomeView',
+      component : HomeView,
       meta: { transition: 'fade-leave-active' },
     },
     {
@@ -21,7 +22,8 @@ const router = createRouter({
     {
       path: '/findpwd',
       name: 'ForgotPasswordView',
-      component: LoginView
+      component: ForGotPwdView,
+      meta: { transition: 'fade-leave-active' },
     },
     {
       path: '/register',

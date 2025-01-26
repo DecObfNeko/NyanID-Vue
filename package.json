@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "build-only": "vite build",
@@ -13,6 +13,7 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.0.0",
     "axios": "^1.7.9",
+    "element-plus": "^2.9.3",
     "pinia": "^2.1.7",
     "tailwindcss": "^4.0.0",
     "vue": "^3.4.29",
