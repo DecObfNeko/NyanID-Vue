@@ -70,7 +70,7 @@ const AllUserState = ref(true);
 const AllApplicationState = ref(true);
 const NumberOfEventsState = ref(true);
 
-
+// 错误弹窗
 function open(title:any,msg:any,type:any) {
   ElNotification({
     title: title,
@@ -80,7 +80,6 @@ function open(title:any,msg:any,type:any) {
 }
 // 处理请求
 getServerInfo().then(res => {
-  console.log(res)
   if (res.status === 200) {
     serverInfo.value = res.data.msg;
 
@@ -93,6 +92,7 @@ getServerInfo().then(res => {
     AllApplicationState.value = false;
     NumberOfEventsState.value = false;
   } else {
+    open('Error','Server is down!','error');
     serverInfo.value = 'Server is down!';
 
     show.value = false;
