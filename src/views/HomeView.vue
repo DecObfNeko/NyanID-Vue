@@ -8,7 +8,7 @@
           <p class="py-6">
             由一群可爱的猫猫创建的工作室DecobfnekoDev MahiroHackerฅ(＞﹏＜) No Dimples#1337 here :
             <br>
-            <span v-if="NumberOfEventsState" class="loading loading-ring loading-xl"  ></span>
+            <span v-if="serverInfoState" class="loading loading-ring loading-xl"  ></span>
             <transition name="el-fade-in">
             <div   v-html="serverInfo" class="transition-box"></div>
             </transition>
@@ -16,7 +16,7 @@
           <button class="btn btn-primary">Get Started</button>
         </div>
         <transition name="el-zoom-in-bottom">
-        <div class="stats-container transition-box" v-show="show" v-if="NumberOfEventsState" >
+        <div class="stats-container transition-box" v-show="show">
           <div class="stats shadow glass">
             <div class="stat place-items-center w-90">
               <div class="stat-title">AllUser</div>
@@ -70,7 +70,8 @@ const serverInfo = ref('');
 const AllUser = ref('');
 const AllApplication = ref('');
 const NumberOfEvents = ref('');
-const show = ref(true)
+const serverInfoState = ref(true);
+const show = ref(true);
 const AllUserState = ref(true);
 const AllApplicationState = ref(true);
 const NumberOfEventsState = ref(true);
@@ -97,25 +98,21 @@ const getServerInfo = async () => {
       AllApplication.value = res.data.AllApplication;
       NumberOfEvents.value = res.data.NumberOfEvents;
 
-      AllUserState.value = false;
-      AllApplicationState.value = false;
-      NumberOfEventsState.value = true;
-    } else {
-      serverInfo.value = 'Server is down!';
-      AllUser.value = '0';
-      AllApplication.value = '0';
-      NumberOfEvents.value = '0';
-
+      serverInfoState.value = false;
       AllUserState.value = false;
       AllApplicationState.value = false;
       NumberOfEventsState.value = false;
+    } else {
+      serverInfo.value = 'Server is down!';
+
+      show.value = false;
     }
   } catch (error) {
-    serverInfo.value = '<p style="color: brown">Server is down!</p>';
-    AllUser.value = '0';
-    AllApplication.value = '0';
-    NumberOfEvents.value = '0';
+    serverInfo.value = '<p style="color: brown">Server is down!</p>'; 
     open('Error', 'Failed to fetch:'+error, 'error')
+
+    show.value = false;
+    serverInfoState.value = false;
     AllUserState.value = false;
     AllApplicationState.value = false;
     NumberOfEventsState.value = false;
