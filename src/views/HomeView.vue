@@ -82,37 +82,24 @@ function open(title:any,msg:any,type:any) {
 getServerInfo().then(res => {
   console.log(res)
   if (res.status === 200) {
-    serverInfo.value = 'Here is NyaCat Cloud';
+    serverInfo.value = res.data.msg
 
     AllUser.value = res.data.AllUser;
     AllApplication.value = res.data.AllApplication;
     NumberOfEvents.value = res.data.NumberOfEvents;
-// 请求
-const getServerInfo = async () => {
-  try {
-    const res = await axios({
-      url: `${config}/api/zako/v2/server`,
-      method: 'GET',
-      timeout: 5000,
-    });
-    if (res.status === 200) {
-      serverInfo.value = res.data.msg;
-      AllUser.value = res.data.AllUser;
-      AllApplication.value = res.data.AllApplication;
-      NumberOfEvents.value = res.data.NumberOfEvents;
 
     serverInfoState.value = false;
     AllUserState.value = false;
     AllApplicationState.value = false;
     NumberOfEventsState.value = false;
   } else {
+    open('Error',res.data,'error');
     serverInfo.value = 'Server is down!';
 
     show.value = false;
     serverInfoState.value = false;
   }
 })
-
 // 创建一个响应式变量来控制动画
 const isMounted = ref(false)
 

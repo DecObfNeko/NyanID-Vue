@@ -12,7 +12,7 @@ export const getServerInfo = async () => {
         console.error('Error fetching server info:', error);
         return {
             status: error.response ? error.response.status : 500,
-            data: null
+            data: error
         };
     }
 };
