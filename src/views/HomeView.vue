@@ -22,21 +22,16 @@
               <div class="stat-title">AllUser</div>
               <span v-if="AllUserState" class="loading loading-ring loading-xl"></span>
               <div class="stat-value text-secondary">{{ AllUser }}</div>
-              <div class="stat-desc text-secondary">AllUser</div>
             </div>
-
             <div class="stat place-items-center w-90">
               <div class="stat-title">AllApplication</div>
               <span v-if="AllApplicationState" class="loading loading-ring loading-xl"></span>
               <div class="stat-value">{{ AllApplication }}</div>
-              <div class="stat-desc">AllApplication</div>
             </div>
-
             <div class="stat place-items-center w-90">
               <div class="stat-title">NumberOfEvents</div>
               <span v-if="AllApplicationState" class="loading loading-ring loading-xl"></span>
               <div class="stat-value">{{ NumberOfEvents }}</div>
-              <div class="stat-desc">NumberOfEvents</div>
             </div>
           </div>
         </div>
@@ -92,7 +87,7 @@ const getServerInfo = async () => {
       timeout: 5000,
     });
     if (res.status === 200) {
-      serverInfo.value = 'Here is NyaCat Cloud!';
+      serverInfo.value = res.data.msg;
       AllUser.value = res.data.AllUser;
       AllApplication.value = res.data.AllApplication;
       NumberOfEvents.value = res.data.NumberOfEvents;
