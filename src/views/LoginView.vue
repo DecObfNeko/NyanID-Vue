@@ -40,12 +40,24 @@
 
 
 <script setup lang="ts" name="LoginView">
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import { login } from '@/api/login.d'
 import { ElNotification } from 'element-plus'
+import Cookies from 'js-cookie'
 
 const email = ref('')
 const password = ref('')
+
+const router = useRouter()
+
+// 检查是否存在 LoginToken，如果存在则跳转到主页
+const LoginToken = Cookies.get('LoginToken')
+
+if (LoginToken) {
+  open('Error', 'You are already logged in', 'error')
+  router.push({ path: "/" })
+}
 
 function open(title: any, msg: any, type: any) {
   ElNotification({
@@ -69,12 +81,13 @@ const Login = () => {
   login(email.value, password.value).then(res => {
     if (res.status === 200) {
       console.log(res.data)
-      const cookieValue = res.data.token
-      const cookieName = 'myCookie'
-      const expiresDays = 7 // Cookie will expire in 7 days
+      const LoginCookieValue = res.data.token
+      const LoginCookieName = 'LoginToken'
+      const expiresDays = 7 // 设置cookie过期时间为7天
       const expires = new Date(Date.now() + expiresDays * 864e5).toUTCString()
-      document.cookie = `${cookieName}=${encodeURIComponent(cookieValue)}; expires=${expires}; path=/`
-      alert('Cookie set successfully!')
+      document.cookie = `${LoginCookieName}=${encodeURIComponent(LoginCookieValue)}; expires=${expires}; path=/`
+      
+      router.push({ path: "/" }) // 登录成功后跳转到首页
     } else {
       open('Error', res.data.message, 'error')
     }
