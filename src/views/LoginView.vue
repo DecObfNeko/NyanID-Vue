@@ -74,9 +74,9 @@ const Login = () => {
       const expiresDays = 7 // Cookie will expire in 7 days
       const expires = new Date(Date.now() + expiresDays * 864e5).toUTCString()
       document.cookie = `${cookieName}=${encodeURIComponent(cookieValue)}; expires=${expires}; path=/`
-      alert('Cookie set successfully!')
+      // alert('Cookie set successfully!')
     } else {
-      open('Error', 'Login failed', 'error')
+      open('Error', res.data.message, 'error')
     }
   }).catch(err => {
     console.error(err)
