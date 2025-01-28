@@ -86,9 +86,13 @@ header {
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
+import { getUserInfo } from '@/api/userInfo.d'
+import Cookies from 'js-cookie'
 
 const headerClass = ref('glass')
 const navbarClass = ref('glass')
+
+const LoginToken = Cookies.get('LoginToken')
 
 const handleScroll = () => {
   if (window.scrollY > 0) {
@@ -99,6 +103,12 @@ const handleScroll = () => {
     navbarClass.value = 'glass'
   }
 }
+
+getUserInfo(LoginToken).then(res => {
+  if (res.status === 200) {
+    console.log(res)
+  }
+})
 
 onMounted(() => {
   window.addEventListener('scroll', handleScroll)
