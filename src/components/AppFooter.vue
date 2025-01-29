@@ -5,7 +5,7 @@
     <p class="footer-title">
         NyaCat Cloud Software Studio.<br />
       <br />
-      Copyleft 2018-2024 DecobfnekoDev Industries, LLC. All Rights Reserved.
+      Copyleft 2018-2025 DecobfnekoDev All Rights Reserved.
       <br />
       The source of the picture resources used on this site is the Internet,<br /> if there is any infringement, please contact us to delete.
     </p>
@@ -14,7 +14,7 @@
  
    <button @click="ClickCat()">
     <p class="footer-title">
-    <img src="@/assets/img/miaonai.png" class="w-40 animate-bounce" />
+    <img src="@/assets/img/a19910ebfa3d642f6f5e4a55ed0020cb.png" class="w-40 animate-bounce" />
         这是猫猫,你可以摸摸她awa
     </p>
    </button>

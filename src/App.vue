@@ -52,7 +52,8 @@ import { ref, onMounted, reactive } from 'vue';
     const imgUrl = ref('');
 
     const randomImg = async () => {
-      let randomint = Math.floor(Math.random() * 31) + 1;
+      // let randomint = Math.floor(Math.random() * 31) + 1;
+      const randomint = 1;
       try {
         let m = await import(`@/assets/rimages/${randomint}.jpg`);
         imgUrl.value = m.default;
