@@ -83,7 +83,7 @@ const Login = () => {
       console.log(res.data)
       const LoginCookieValue = res.data.token
       const LoginCookieName = 'LoginToken'
-      const expiresDays = 7 // 设置cookie过期时间为7天
+      const expiresDays = 7 // 设置cookie过期时间为7天 
       const expires = new Date(Date.now() + expiresDays * 864e5).toUTCString()
       document.cookie = `${LoginCookieName}=${encodeURIComponent(LoginCookieValue)}; expires=${expires}; path=/`
       
