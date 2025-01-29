@@ -17,9 +17,6 @@
 <script name="App" lang="ts" setup>
 import AppHeader from '@/components/AppHeader.vue';
 import AppFooter from '@/components/AppFooter.vue';
-import { Application, Assets } from 'pixi.js';
-import '@esotericsoftware/spine-pixi-v8';
-import {useBgggS} from '@/config/bgenv.d';
 import { ref, onMounted, reactive } from 'vue';
 
 
