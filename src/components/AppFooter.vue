@@ -5,7 +5,7 @@
     <p class="footer-title">
         NyaCat Cloud Software Studio.<br />
       <br />
-      Copyleft 2018-2024 DecobfnekoDev .
+      Copyleft 2018-2024 DecobfnekoDev Industries, LLC. All Rights Reserved.
       <br />
       The source of the picture resources used on this site is the Internet,<br /> if there is any infringement, please contact us to delete.
     </p>
