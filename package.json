@@ -11,11 +11,13 @@
     "type-check": "vue-tsc --build --force"
   },
   "dependencies": {
+    "@esotericsoftware/spine-pixi-v8": "^4.2.70",
     "@tailwindcss/vite": "^4.0.0",
     "axios": "^1.7.9",
     "element-plus": "^2.9.3",
     "js-cookie": "^3.0.5",
     "pinia": "^2.1.7",
+    "pixi.js": "^8.7.2",
     "tailwindcss": "^4.0.0",
     "vue": "^3.4.29",
     "vue-router": "^4.3.3"

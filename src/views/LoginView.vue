@@ -56,7 +56,7 @@ const LoginToken = Cookies.get('LoginToken')
 
 if (LoginToken) {
   open('Error', 'You are already logged in', 'error')
-  router.push({ path: "/" })
+  router.push({ path: "/user" })
 }
 
 function open(title: any, msg: any, type: any) {

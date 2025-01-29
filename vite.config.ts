@@ -15,7 +15,7 @@ export default defineConfig({
   server: {
     allowedHosts: ['.nyanid.cn']
     },
-  resolve: {
+      resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
