@@ -1,15 +1,15 @@
 <template html>
   <div class="base-300 dark:bg-base-300">
+    <AppHeader #="body" html data-theme="" /> 
+  <div style="height: 50px; opacity: 0;"></div>
     <router-view  mode="out-in" v-slot="{ Component }" >
-      <AppHeader #="body" html data-theme=""> 
-      </AppHeader>
        <div id="section">
        <transition name="fade" mode="out-in">
     <component :is="Component" />
   </transition>
   </div>
-  <AppFooter />
 </router-view>
+  <AppFooter />
 </div>
 </template>
 //把页面拆成一个个component和view然后在这里引入
@@ -37,7 +37,7 @@ import { ref, onMounted, reactive } from 'vue';
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡴⠁⣤⣤⣤⡄⣠⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⡄⠀⠀⠀⠀⠀⠀⣠⠀⠀⢀⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠜⢀⡾⠷⣶⡏⣼⢣⡟⢀⡾⣵⣿⣿⢃⣴⣯⣿⢀⡾⢋⡾⠛⠛⣼⠛⣿⢣⡞⢸⣇⡼⣫⣾⣿⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠀⠚⠛⠛⠋⠘⠁⠛⠛⠋⠘⠛⠛⠓⠋⠀⠘⠃⠛⠀⠘⠛⠛⠘⠁⠘⠃⠛⠀⠛⠋⠀⠛⠛⠛⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-    NyanID - Vue3 DevReBuild 0.3v                      
+    NyanID - Vue3 DevReBuild 0.3v                      我是玩蔚蓝档案的
 `);}, 200);
     };
 

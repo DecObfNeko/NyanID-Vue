@@ -5,9 +5,8 @@
     <p class="footer-title">
         NyaCat Cloud Software Studio.<br />
       <br />
-      Copyleft 2018-2025 DecobfnekoDev All Rights Reserved.
+      Copyleft 2018-2025 DecobfnekoDev LTD. All Rights Reserved.
       <br />
-      The source of the picture resources used on this site is the Internet,<br /> if there is any infringement, please contact us to delete.
     </p>
   </aside>
   <figure>  
@@ -23,10 +22,10 @@
 
   <nav>
     <h6 class="footer-title">Services & Links</h6>
-    <a class="link link-hover">Join us</a>
-    <a class="link link-hover">Privacy Policy</a>
-    <a class="link link-hover">Terms of Service</a>
-    <a class="link link-hover">Advertisement</a>
+    <RouterLink to="/joinus" class="link link-hover">Join us</RouterLink>
+    <RouterLink to="/PrivacyPolicy" class="link link-hover">Privacy Policy</RouterLink>
+    <RouterLink to="/TOS" class="link link-hover">Terms of Service</RouterLink>
+    <RouterLink to="/DMCA" class="link link-hover">DMCA</RouterLink>
   </nav>
 
 
@@ -73,6 +72,7 @@ img {
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
+import { RouterLink } from 'vue-router'
 
 // 使用内置的类型定义
 const toasts = ref<Array<{ id: number, timer: ReturnType<typeof setTimeout> }>>([])
