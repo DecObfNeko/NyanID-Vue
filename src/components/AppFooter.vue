@@ -22,9 +22,10 @@
 
   <nav>
     <h6 class="footer-title">Services & Links</h6>
+    <RouterLink to="/aboutus" class="link link-hover">About Us</RouterLink>
     <RouterLink to="/joinus" class="link link-hover">Join us</RouterLink>
     <RouterLink to="/PrivacyPolicy" class="link link-hover">Privacy Policy</RouterLink>
-    <RouterLink to="/TOS" class="link link-hover">Terms of Service</RouterLink>
+    <RouterLink to="/tos" class="link link-hover">Terms of Service</RouterLink>
     <RouterLink to="/DMCA" class="link link-hover">DMCA</RouterLink>
   </nav>
 

@@ -2,7 +2,7 @@
   <div>
     <div class="hero min-h-screen">
       <div class="hero-content flex-col lg:flex-row-reverse">
-        <img src="@/assets/img/9d29c274472bfd1e58bf4e7a2efb180f.png" :class="['max-w-sm', { 'animate-fly-in': isMounted }]" />
+        <img src="@/assets/img/3a614988d5e2c37ff40d29e232066f86.png" :class="['max-w-sm', { 'animate-fly-in': isMounted }]" />
         <div :class="[{ 'animate-fly-in': isMounted }]">
           <h1 class="text-5xl font-bold">NyaCat Cloud</h1>
           <p class="py-6">

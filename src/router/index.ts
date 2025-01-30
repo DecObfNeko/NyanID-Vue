@@ -7,6 +7,7 @@ import VerificationView from '@/views/VerificationView.vue'
 import UserHomeView from '@/views/UserHomeView.vue'
 
 import { createRouter, createWebHistory } from 'vue-router'
+import TeamView from '@/views/TeamView.vue'
 
 
 const router = createRouter({
@@ -49,6 +50,16 @@ const router = createRouter({
       path: '/user',
       name: 'UserHomeView',
       component: UserHomeView,
+    },
+    {
+      path: '/tos',
+      name: 'UserHomeView',
+      component: UserHomeView,
+    },
+    {
+      path: '/aboutus',
+      name: 'TeamView',
+      component: TeamView,
     }
   ]
 })
