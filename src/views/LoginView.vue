@@ -43,7 +43,7 @@ import { useRouter } from 'vue-router'
 import { login } from '@/api/login.d'
 import { ElNotification } from 'element-plus'
 import Cookies from 'js-cookie'
-import { c } from 'node_modules/vite/dist/node/types.d-aGj9QkWt'
+import { getUserInfo } from '@/api/userInfo.d'
 
 const email = ref('')
 const password = ref('')
@@ -52,10 +52,19 @@ const router = useRouter()
 
 // 检查是否存在 LoginToken，如果存在则跳转到主页
 const LoginToken = Cookies.get('LoginToken')
+const isLogin = ref()
+getUserInfo(LoginToken).then(res => {
+  if (res.status === 200) {
+    isLogin.value = false
+  }else{
+    Cookies.remove('LoginToken')
+    isLogin.value = true
+  }
+})
 
-if (LoginToken) {
+if (isLogin.value) {
   open('Error', 'You are already logged in', 'error')
-  router.push({ path: "/user" })
+  router.push({ path: "/",replace : true })
 }
 
 function open(title: any, msg: any, type: any) {
@@ -85,8 +94,10 @@ const Login = () => {
       const expiresDays = 7 // 设置cookie过期时间为7天 
       const expires = new Date(Date.now() + expiresDays * 864e5).toUTCString()
       document.cookie = `${LoginCookieName}=${encodeURIComponent(LoginCookieValue)}; expires=${expires}; path=/`
-    
-      router.push({ path: "/" }) // 登录成功后跳转到首页
+      open('Success', 'Login successful', 'success')
+      setTimeout(() => {
+      window.location.href = "/";
+      }, 500)
     } else {
       open('Error', res.data.message, 'error')
     }

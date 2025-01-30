@@ -69,13 +69,13 @@
           </svg>
         </label>
         <RouterLink  class="btn" to="/login" v-if="!isLogin">Login</RouterLink>
-        <RouterLink  class="flex-0.5 btn btn-ghost px-3 h-13" to="/UserHome"  v-if="isLogin">
+        <RouterLink  class="flex-0.5 bg-base-300 btn btn-ghost px-3 h-13 glass" to="/user"  v-if="isLogin">
           <div class="avatar" to="/user">
             <div class="w-10 rounded-xl">
               <img :src="avatarUrl" alt="User Avatar" />
             </div>
           </div>
-          <div class="inline-flex text-lg">{{ UserName }}</div>
+          <p class="inline-flex text-lg" :style="{ color: isDeveloper ? 'pink' : '' }">{{ UserName }}</p>
         </RouterLink>
       </div>
     </div>
@@ -106,7 +106,7 @@ const isLogin = ref(false)
 
 const avatarUrl = ref('')
 const UserName = ref('')
-
+const isDeveloper = ref()
 const LoginToken = Cookies.get('LoginToken')
 
 const handleScroll = () => {
@@ -124,6 +124,8 @@ getUserInfo(LoginToken).then(res => {
     isLogin.value = true
     avatarUrl.value = `${config}/api/zako/res/avatar/${res.data.uid}`
     UserName.value = res.data.nickname
+    isDeveloper.value = res.data.isDeveloper
+    console.log(res.data)
   }
 })
 

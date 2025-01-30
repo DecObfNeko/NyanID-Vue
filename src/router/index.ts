@@ -4,6 +4,7 @@ import ForGotPwdView from '@/views/ForGotPwdView.vue'
 import PrivacyPolicyView from '@/views/PrivacyPolicyView.vue'
 import RegisterView from '@/views/RegisterView.vue'
 import VerificationView from '@/views/VerificationView.vue'
+import UserHomeView from '@/views/UserHomeView.vue'
 
 import { createRouter, createWebHistory } from 'vue-router'
 
@@ -43,6 +44,11 @@ const router = createRouter({
       path: '/verification/:token',
       name: 'VerificationView',
       component: VerificationView,
+    },
+    {
+      path: '/user',
+      name: 'UserHomeView',
+      component: UserHomeView,
     }
   ]
 })
