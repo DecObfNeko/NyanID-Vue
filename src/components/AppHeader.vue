@@ -46,6 +46,7 @@
         </ul>
       </div>
       <div class="navbar-end">
+        <input type="text" placeholder="SearchPlayer" class="input input-bordered w-24 md:w-auto" />
         <label class="swap swap-rotate menu">
           <!-- this hidden checkbox controls the state -->
           <input type="checkbox" class="theme-controller" value="dark" />

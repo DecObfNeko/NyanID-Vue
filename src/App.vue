@@ -1,5 +1,5 @@
 <template html>
-  <div class="base-300 dark:bg-base-300">
+  <div class="base-300 dark:bg-base-300" v-loading.fullscreen.lock="fullscreenLoading" element-loading-text="喵喵喵? 在加载呢杂鱼awa" type="primary">
     <AppHeader #="body" html data-theme="" /> 
   <div style="height: 50px; opacity: 0;"></div>
     <router-view  mode="out-in" v-slot="{ Component }" >
@@ -21,10 +21,20 @@ import { ref, onMounted, reactive } from 'vue';
 import { ElNotification } from 'element-plus'
 import { getServerInfo } from '@/api/serverInfo.d'
 
+
+const fullscreenLoading = ref(false)
+const openFullScreen = () => {
+  fullscreenLoading.value = true
+}
+   openFullScreen();
+const closeFullScreen = () => {
+    fullscreenLoading.value = false
+}
+
     /* 初始化 */
     const initialize = async () => {
+       
       await randomImg();
-
       setTimeout(() => {
         console.log(`⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⡤⠶⠖⠒⠶⠶⠤⣄⣀⠀⠀⢀⠌⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⠃⢀⠀⠀⠀⠀⠀⠀⠀⠈⠙⢲⢮⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
@@ -40,11 +50,14 @@ import { getServerInfo } from '@/api/serverInfo.d'
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠀⠚⠛⠛⠋⠘⠁⠛⠛⠋⠘⠛⠛⠓⠋⠀⠘⠃⠛⠀⠘⠛⠛⠘⠁⠘⠃⠛⠀⠛⠋⠀⠛⠛⠛⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
     NyanID - Vue3 DevReBuild 0.3v                      我是玩蔚蓝档案的
       `);}, 200);
+  
           };
 
 
           onMounted(() => {
             initialize();
+          
+
       });
 
       function open(title: any, msg: any, type: any) {
@@ -56,7 +69,8 @@ import { getServerInfo } from '@/api/serverInfo.d'
       }
 
       //全站通知
-      getServerInfo().then(res => {
+      getServerInfo().then(res => {  
+        closeFullScreen();
       if (res.status === 200) {
         if(res.data.Notification !== false) {
           open(res.data.NotificationTypeName,res.data.NotificationData,res.data.NotificationType);
@@ -64,7 +78,7 @@ import { getServerInfo } from '@/api/serverInfo.d'
       } else {
         open('Error','Server is down!','error');
       }
-
+    
 })
 
 

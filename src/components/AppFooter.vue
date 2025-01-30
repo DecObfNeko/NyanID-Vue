@@ -13,7 +13,7 @@
  
    <button @click="ClickCat()">
     <p class="footer-title">
-    <img src="@/assets/img/a19910ebfa3d642f6f5e4a55ed0020cb.png" class="w-40 animate-bounce" />
+    <img src="@/assets/img/9d29c274472bfd1e58bf4e7a2efb180f.png" class="w-40 animate-bounce" />
         这是猫猫,你可以摸摸她awa
     </p>
    </button>
