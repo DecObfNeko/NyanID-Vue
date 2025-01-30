@@ -1,9 +1,11 @@
 import LoginView from '@/views/LoginView.vue'
 import HomeView from '@/views/HomeView.vue'
 import ForGotPwdView from '@/views/ForGotPwdView.vue'
-import { createRouter, createWebHistory } from 'vue-router'
 import PrivacyPolicyView from '@/views/PrivacyPolicyView.vue'
 import RegisterView from '@/views/RegisterView.vue'
+import VerificationView from '@/views/VerificationView.vue'
+
+import { createRouter, createWebHistory } from 'vue-router'
 
 
 const router = createRouter({
@@ -36,6 +38,11 @@ const router = createRouter({
       path: '/register',
       name: 'RegisterView',
       component: RegisterView
+    },
+    {
+      path: '/verification/:token',
+      name: 'VerificationView',
+      component: VerificationView,
     }
   ]
 })

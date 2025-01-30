@@ -28,7 +28,7 @@
           <label class="fieldset-label">Password</label>
           <input type="password" class="input" placeholder="Password" v-model="password" required />
           <RouterLink to="/PrivacyPolicy" class="link link-hover">You should read our Privacy Policy before registering</RouterLink>
-          <div><RouterLink to="/findpwd" class="link link-hover">Forgot password?</RouterLink>  <RouterLink to="/register" class="link link-hover">Register Now!</RouterLink> </div>
+          <div><RouterLink to="/findpwd" class="link link-hover">Forgot password?</RouterLink>  <RouterLink to="/login" class="link link-hover">Login Now!</RouterLink> </div>
           <button class="btn btn-neutral mt-4" @click="Register" >Login</button>
         </fieldset>
         
@@ -43,6 +43,7 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { ElNotification } from 'element-plus'
 import Cookies from 'js-cookie'
+import { register } from '@/api/register.d'
 
 const email = ref('')
 const password = ref('')
@@ -72,6 +73,15 @@ const validateEmail = (email: string) => {
 }
 
 function Register() {
+  register(username.value, password.value, email.value).then(res => {
+  if (res.status === 200) {
+    open('Success', 'chenk your mailbox!', 'success')
+  } else {
+    open('Error', res.data.message, 'error')
+  }
+  }).catch(err => {
+    open('Error', 'Network error', 'error')
+  })
 }
 
 
