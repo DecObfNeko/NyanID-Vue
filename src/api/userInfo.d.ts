@@ -1,5 +1,6 @@
 import config from '@/config/configenv.d.ts';
 import axios from 'axios';
+axios.defaults.withCredentials = true;
 
 export const getUserInfo = async (LoginToken) => {
     try {
