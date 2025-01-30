@@ -43,6 +43,7 @@ import { useRouter } from 'vue-router'
 import { login } from '@/api/login.d'
 import { ElNotification } from 'element-plus'
 import Cookies from 'js-cookie'
+import { c } from 'node_modules/vite/dist/node/types.d-aGj9QkWt'
 
 const email = ref('')
 const password = ref('')
@@ -84,7 +85,7 @@ const Login = () => {
       const expiresDays = 7 // 设置cookie过期时间为7天 
       const expires = new Date(Date.now() + expiresDays * 864e5).toUTCString()
       document.cookie = `${LoginCookieName}=${encodeURIComponent(LoginCookieValue)}; expires=${expires}; path=/`
-      
+    
       router.push({ path: "/" }) // 登录成功后跳转到首页
     } else {
       open('Error', res.data.message, 'error')
