@@ -18,7 +18,8 @@
 import AppHeader from '@/components/AppHeader.vue';
 import AppFooter from '@/components/AppFooter.vue';
 import { ref, onMounted, reactive } from 'vue';
-
+import { ElNotification } from 'element-plus'
+import { getServerInfo } from '@/api/serverInfo.d'
 
     /* 初始化 */
     const initialize = async () => {
@@ -38,13 +39,33 @@ import { ref, onMounted, reactive } from 'vue';
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠜⢀⡾⠷⣶⡏⣼⢣⡟⢀⡾⣵⣿⣿⢃⣴⣯⣿⢀⡾⢋⡾⠛⠛⣼⠛⣿⢣⡞⢸⣇⡼⣫⣾⣿⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠀⠚⠛⠛⠋⠘⠁⠛⠛⠋⠘⠛⠛⠓⠋⠀⠘⠃⠛⠀⠘⠛⠛⠘⠁⠘⠃⠛⠀⠛⠋⠀⠛⠛⠛⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
     NyanID - Vue3 DevReBuild 0.3v                      我是玩蔚蓝档案的
-`);}, 200);
-    };
+      `);}, 200);
+          };
 
 
-    onMounted(() => {
-      initialize();
-});
+          onMounted(() => {
+            initialize();
+      });
+
+      function open(title: any, msg: any, type: any) {
+        ElNotification({
+          title: title,
+          message: msg,
+          type: type,
+        })
+      }
+
+      //全站通知
+      getServerInfo().then(res => {
+      if (res.status === 200) {
+        if(res.data.Notification !== false) {
+          open(res.data.NotificationTypeName,res.data.NotificationData,res.data.NotificationType);
+        }
+      } else {
+        open('Error','Server is down!','error');
+      }
+
+})
 
 
 

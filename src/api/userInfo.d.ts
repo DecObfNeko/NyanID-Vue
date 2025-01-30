@@ -6,6 +6,7 @@ export const getUserInfo = async (LoginToken) => {
         const response = await axios ({
             method: 'get',
             url: `${config}/api/zako/v1/userinfo`,
+            changOrigin: true,
             headers: {
                 'Authorization': `Bearer ${LoginToken}`,
                 'Event': 'Gi',

@@ -11,12 +11,13 @@ export const login = async (email, password) => {
                 "pwd": password
             },
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                "LoginForWeb":"true" 
             }
         });
         return {
             status: response.status,
-            data: response.data
+            data: response.data,
         };
     } catch (error) {
         console.error('Error fetching server info:', error);

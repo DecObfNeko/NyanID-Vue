@@ -93,6 +93,7 @@ const headerClass = ref('glass')
 const navbarClass = ref('glass')
 
 const LoginToken = Cookies.get('LoginToken')
+console.error(LoginToken);
 
 const handleScroll = () => {
   if (window.scrollY > 0) {
