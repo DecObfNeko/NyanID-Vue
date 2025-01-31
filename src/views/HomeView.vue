@@ -10,7 +10,7 @@
             <br>
             <span v-if="serverInfoState" class="loading loading-ring loading-xl"></span>
             <transition name="el-fade-in">
-            <div   v-html="serverInfo" class="transition-box"></div>
+            <div   v-html="serverInfo" style="color: plum;" class="transition-box"></div>
             </transition>
           </p>
           <button class="btn btn-primary">Get Started</button>

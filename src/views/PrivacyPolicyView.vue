@@ -5,7 +5,7 @@
     <div>更新日期：<strong>2025/1/30</strong></div>
 <div>生效日期：<strong>2025/1/30</strong></div>
 <div role="tablist" class="tabs tabs-box">
-  <input type="radio" name="my_tabs_5" role="tab" class="tab" aria-label="Page 1" checked="checked"/>
+  <input type="radio" name="my_tabs_5" role="tab" class="tab" aria-label="Page 1" />
   <div class="tab-content bg-base-100 border-base-300 p-6"><p>
   <i>NyaCat Cloud</i> 是一款由 <i>DecobfNeko Studio</i> （以下简称“我们”）提供的产品。
   您在使用我们的服务时，我们可能会收集和使用您的相关信息。我们希望通过本《隐私政策》向您说明，在使用我们的服务时，我们如何收集、使用、储存和分享这些信息，以及我们为您提供的访问、更新、控制和保护这些信息的方式。
@@ -84,11 +84,3 @@
 
 
 </template>
-
-<script lang="ts" name="PrivacyPolicyView">
-
-
-
-
-</script>
-

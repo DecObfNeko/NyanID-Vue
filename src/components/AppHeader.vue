@@ -69,14 +69,27 @@
           </svg>
         </label>
         <RouterLink  class="btn" to="/login" v-if="!isLogin">Login</RouterLink>
-        <RouterLink  class="flex-0.5 bg-base-300 btn btn-ghost px-3 h-13 glass" to="/user"  v-if="isLogin">
-          <div class="avatar" to="/user">
-            <div class="w-10 rounded-xl">
-              <img :src="avatarUrl" alt="User Avatar" />
-            </div>
-          </div>
-          <p class="inline-flex text-lg" :style="{ color: isDeveloper ? 'pink' : '' }">{{ UserName }}</p>
-        </RouterLink>
+        <div class="dropdown dropdown-end" :hidden="!isLogin">
+      <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+        <div class="w-10 rounded-full">
+          <img
+            alt="Tailwind CSS Navbar component"
+            :src="avatarUrl" />
+        </div>
+      </div>
+      <ul
+        tabindex="0"
+        class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+        <li>
+          <RouterLink class="justify-between" :to=link+uid>
+            <p class="text-xs" :style="{ color: isDeveloper ? 'pink' : '' }">{{ UserName }}</p>
+            <span class="badge">Profile</span>
+          </RouterLink>
+        </li>
+        <li><a>Settings</a></li>
+        <li><a v-on:click="Logout">Logout</a></li>
+      </ul>
+    </div>
       </div>
     </div>
   </header>
@@ -108,7 +121,8 @@ const avatarUrl = ref('')
 const UserName = ref('')
 const isDeveloper = ref()
 const LoginToken = Cookies.get('LoginToken')
-
+const uid = ref()
+const link = "/user/"
 const handleScroll = () => {
   if (window.scrollY > 0) {
     headerClass.value = 'white'
@@ -118,6 +132,10 @@ const handleScroll = () => {
     navbarClass.value = 'glass'
   }
 }
+function Logout() {
+  Cookies.remove('LoginToken')
+  window.location.reload()
+}
 
 getUserInfo(LoginToken).then(res => {
   if (res.status === 200) {
@@ -125,7 +143,7 @@ getUserInfo(LoginToken).then(res => {
     avatarUrl.value = `${config}/api/zako/res/avatar/${res.data.uid}`
     UserName.value = res.data.nickname
     isDeveloper.value = res.data.isDeveloper
-    console.log(res.data)
+    uid.value = res.data.uid
   }
 })
 

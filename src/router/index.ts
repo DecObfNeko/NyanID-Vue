@@ -5,6 +5,7 @@ import PrivacyPolicyView from '@/views/PrivacyPolicyView.vue'
 import RegisterView from '@/views/RegisterView.vue'
 import VerificationView from '@/views/VerificationView.vue'
 import UserHomeView from '@/views/UserHomeView.vue'
+import TermsOfServiceView from '@/views/TermsOfServiceView.vue'
 
 import { createRouter, createWebHistory } from 'vue-router'
 import TeamView from '@/views/TeamView.vue'
@@ -47,14 +48,14 @@ const router = createRouter({
       component: VerificationView,
     },
     {
-      path: '/user',
+      path: '/user/:uuid',
       name: 'UserHomeView',
       component: UserHomeView,
     },
     {
       path: '/tos',
-      name: 'UserHomeView',
-      component: UserHomeView,
+      name: 'TeamOfServiceView',
+      component: TermsOfServiceView,
     },
     {
       path: '/aboutus',
