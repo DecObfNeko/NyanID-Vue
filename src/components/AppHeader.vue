@@ -125,7 +125,6 @@ getUserInfo(LoginToken).then(res => {
     avatarUrl.value = `${config}/api/zako/res/avatar/${res.data.uid}`
     UserName.value = res.data.nickname
     isDeveloper.value = res.data.isDeveloper
-    console.log(res.data)
   }
 })
 
