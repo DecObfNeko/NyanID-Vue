@@ -76,7 +76,7 @@ const closeFullScreen = () => {
           open(res.data.NotificationTypeName,res.data.NotificationData,res.data.NotificationType);
         }
       } else {
-        open('Error','Server is down!','error');
+        open('Error','Notify that the service is offline!','error');
       }
     
 })
