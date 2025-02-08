@@ -7,14 +7,13 @@
       <p style="font-size: 35px;" class="font-semibold text-center">MahiroHackerฅ(＞﹏＜) No Dimples#1337 here :(</p>
       <div class="card-body">
         <div class="grid lg:grid-cols-4 gap-4">
-          <div v-for="developer in developers" :key="developer.id" class="card bg-base-100 h-120 w-90 shadow-xl">
-            <figure class="px-10 pt-10">
-              <img :src="developer.avatar" alt="Developer Avatar" class="rounded-xl w-35 h-60 object-cover" />
+          <div v-for="developer in developers" :key="developer.id" class="card bg-base-100 shadow-x">
+            <figure class="px-10">
+              <img :src="developer.avatar" alt="Developer Avatar" class="rounded-xl object-cover" />
             </figure>
             <div class="card-body items-center text-center">
               <h2 class="card-title" :style="{color : developer.namecolor}">{{ developer.name }}</h2>
-              <p class="text-xl" :style="{color : developer.titlecolor}">{{ developer.title }}</p>
-              <p>{{ developer.description }}</p>
+              <p class="text-x" :style="{color : developer.titlecolor}">{{ developer.title }}</p>
             </div>
           </div>
         </div>
@@ -29,39 +28,43 @@ import { ref } from 'vue';
 const developers = ref([
   {
     id: 1,
-    avatar: 'https://visage.surgeplay.com/full/256/96c6500f-4c9c-4fd2-86a5-e633862022be',
+    avatar: 'https://visage.surgeplay.com/face/64/96c6500f-4c9c-4fd2-86a5-e633862022be',
     name: 'MahiroONIMAI_',
-    title: 'OWNER',
-    description: 'NETWORKS冬雪喵奈',
+    title: 'OWNER/Server',
     namecolor: 'pink',
     titlecolor: 'pink'
   },
   {
     id: 2,
-    avatar: 'https://visage.surgeplay.com/full/256/a99bc286-ee62-44d8-ae1a-281a3bbe1d65',
+    avatar: 'https://visage.surgeplay.com/face/64/a99bc286-ee62-44d8-ae1a-281a3bbe1d65',
     name: 'icelly_QAQ',
-    title: 'ADMIN',
-    description: 'APPLICATION蓝冰',
+    title: 'ADMIN/Application',
     namecolor: 'skyblue',
     titlecolor: 'skyblue'
   },
   {
     id: 3,
-    avatar: 'https://visage.surgeplay.com/full/256/2216fa32-ddb9-4e59-8df0-909e37e16342',
+    avatar: 'https://visage.surgeplay.com/face/64/2216fa32-ddb9-4e59-8df0-909e37e16342',
     name: 'Aiden_Hopkins',
-    title: 'ADMIN',
-    description: 'APPLICATION舟.',
-    namecolor: 'blue',
-    titlecolor: 'blue'
+    title: 'ADMIN/Application',
+    namecolor: 'skyblue',
+    titlecolor: 'skyblue'
   },
   {
     id: 4,
-    avatar: 'https://visage.surgeplay.com/full/256/f766bf5b-7a4c-4397-aed9-5e60558ee05e',
+    avatar: 'https://visage.surgeplay.com/face/64/f766bf5b-7a4c-4397-aed9-5e60558ee05e',
     name: 'Tears_afb',
-    title: 'MODERATOR',
-    description: 'CHEAT梓川城',
-    namecolor: 'orange',
-    titlecolor: 'orange'
+    title: 'Helper',
+    namecolor: 'skyblue',
+    titlecolor: 'skyblue'
+  },
+  {
+    id: 5,
+    avatar: "/src/assets/img/96ff6904e5b896ad70475440b10b530821492d0b.jpg",
+    name: '顾月辞_',
+    title: 'Illustration',
+    namecolor: 'skyblue',
+    titlecolor: 'skyblue'
   }
 ]);
 </script>

@@ -4,9 +4,9 @@
       <div class="hero-content flex-col lg:flex-row-reverse">
         <img src="@/assets/img/3a614988d5e2c37ff40d29e232066f86.png" :class="['max-w-sm', { 'animate-fly-in': isMounted }]" />
         <div :class="[{ 'animate-fly-in': isMounted }]">
-          <h1 class="text-5xl font-bold">NyaCat Cloud</h1>
-          <p class="py-6">
-            由一群可爱的猫猫创建的工作室DecobfnekoDev MahiroHackerฅ(＞﹏＜) No Dimples#1337 here :
+          <h1 class="text-5xl font-bold" style="color: azure;">NyaCat Cloud</h1>
+          <p class="py-6" style="color: azure;">
+            Meet a better version of yourself ！
             <br>
             <span v-if="serverInfoState" class="loading loading-ring loading-xl"></span>
             <transition name="el-fade-in">

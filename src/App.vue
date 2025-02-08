@@ -91,7 +91,7 @@ const closeFullScreen = () => {
       // let randomint = Math.floor(Math.random() * 31) + 1;
       const randomint = 1;
       try {
-        let m = await import(`@/assets/rimages/${randomint}.jpg`);
+        let m = await import(`@/assets/rimages/${randomint}.png`);
         imgUrl.value = m.default;
         const sectionElement = document.getElementById('section');
         if (sectionElement) {
