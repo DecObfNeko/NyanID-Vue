@@ -2,7 +2,7 @@
   <div>
     <div class="hero min-h-screen">
       <div class="hero-content flex-col lg:flex-row-reverse">
-        <img src="@/assets/img/95146846_p0_trans.png" :class="['max-w-sm', { 'animate-fly-in': isMounted }]" />
+        <img src="@/assets/img/3a614988d5e2c37ff40d29e232066f86.png" :class="['max-w-sm', { 'animate-fly-in': isMounted }]" />
         <div :class="[{ 'animate-fly-in': isMounted }]">
           <h1 class="text-5xl font-bold">NyaCat Cloud</h1>
           <p class="py-6">
@@ -10,7 +10,7 @@
             <br>
             <span v-if="serverInfoState" class="loading loading-ring loading-xl"></span>
             <transition name="el-fade-in">
-            <div   v-html="serverInfo" class="transition-box"></div>
+            <div   v-html="serverInfo" style="color: plum;" class="transition-box"></div>
             </transition>
           </p>
           <button class="btn btn-primary">Get Started</button>
@@ -71,6 +71,7 @@ const AllApplicationState = ref(true);
 const NumberOfEventsState = ref(true);
 
 
+// 错误弹窗
 function open(title:any,msg:any,type:any) {
   ElNotification({
     title: title,
@@ -80,7 +81,6 @@ function open(title:any,msg:any,type:any) {
 }
 // 处理请求
 getServerInfo().then(res => {
-  console.log(res)
   if (res.status === 200) {
     serverInfo.value = res.data.msg
 
