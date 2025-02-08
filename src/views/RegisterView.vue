@@ -29,7 +29,7 @@
           <input type="password" class="input" placeholder="Password" v-model="password" required />
           <RouterLink to="/PrivacyPolicy" class="link link-hover">You should read our Privacy Policy before registering</RouterLink>
           <div><RouterLink to="/findpwd" class="link link-hover">Forgot password?</RouterLink>  <RouterLink to="/login" class="link link-hover">Login Now!</RouterLink> </div>
-          <button class="btn btn-neutral mt-4" @click="Register" >Login</button>
+          <button class="btn btn-neutral mt-4" @click="Register" >Register</button>
         </fieldset>
         
       </div>

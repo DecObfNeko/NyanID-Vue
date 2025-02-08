@@ -11,7 +11,6 @@
     "type-check": "vue-tsc --build --force"
   },
   "dependencies": {
-    "@esotericsoftware/spine-pixi-v8": "^4.2.70",
     "@tailwindcss/vite": "^4.0.0",
     "axios": "^1.7.9",
     "element-plus": "^2.9.3",
@@ -31,7 +30,6 @@
     "npm-run-all2": "^6.2.0",
     "typescript": "~5.4.0",
     "vite": "^5.3.1",
-    "vite-plugin-vue-devtools": "^7.3.1",
     "vue-tsc": "^2.0.21"
   }
 }
