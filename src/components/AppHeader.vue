@@ -156,7 +156,7 @@ getUserInfo(LoginToken).then(res => {
 
 const fetchAvatar = async (uid: string) => {
   try {
-    const response = await axios.get(`${config}/api/zako/res/avatar/${uid}`)
+    const response = await axios.get(`${config.apiUrl}/api/zako/res/avatar/${uid}`)
     if (response.status === 200 && response.data) {
       noAvatar.value = false
     } else {

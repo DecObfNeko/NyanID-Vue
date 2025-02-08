@@ -6,7 +6,7 @@ export const getPublicUserInfo = async (UUID) => {
     try {
         const response = await axios ({
             method: 'get',
-            url: `${config}/api/zako/v2/userinfo/`+UUID,
+            url: `${config.apiUrl}/api/zako/v2/userinfo/`+UUID,
             changOrigin: true,
         });
         return {
