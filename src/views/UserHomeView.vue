@@ -63,7 +63,7 @@ const fetchAvatar = async (uid: string) => {
 getPublicUserInfo(uuid.value).then(res => {
   
   if (res.status === 200) {
-    avatarUrl.value = `${config}/api/zako/res/avatar/${res.data.uid}`
+    avatarUrl.value = `${config.apiUrl}/api/zako/res/avatar/${res.data.uid}`
     UserName.value = res.data.nickname
     isDeveloper.value = res.data.isDeveloper
     description.value = res.data.description
