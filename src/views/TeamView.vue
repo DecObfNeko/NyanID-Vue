@@ -33,8 +33,8 @@ const developers = ref([
     name: 'MahiroONIMAI_',
     title: 'OWNER',
     description: 'NETWORKS冬雪喵奈',
-    namecolor: 'red',
-    titlecolor: 'red'
+    namecolor: 'pink',
+    titlecolor: 'pink'
   },
   {
     id: 2,
@@ -59,7 +59,7 @@ const developers = ref([
     avatar: 'https://visage.surgeplay.com/full/256/f766bf5b-7a4c-4397-aed9-5e60558ee05e',
     name: 'Tears_afb',
     title: 'MODERATOR',
-    description: 'CHEAT伊城',
+    description: 'CHEAT梓川城',
     namecolor: 'orange',
     titlecolor: 'orange'
   }
