@@ -46,6 +46,7 @@
         </ul>
       </div>
       <div class="navbar-end">
+        <input type="text" placeholder="SearchPlayer" class="input input-bordered w-24 md:w-auto" />
         <label class="swap swap-rotate menu">
           <!-- this hidden checkbox controls the state -->
           <input type="checkbox" class="theme-controller" value="dark" />
@@ -67,7 +68,30 @@
               d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z" />
           </svg>
         </label>
-        <RouterLink  class="btn" to="/login">Login</RouterLink>
+        <RouterLink  class="btn" to="/login" v-if="!isLogin">Login</RouterLink>
+        <div class="dropdown dropdown-end" :hidden="!isLogin">
+      <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+        <div class="w-10 rounded-full">
+          <img 
+            v-if="!noAvatar"
+            alt="Tailwind CSS Navbar component"
+            :src="avatarUrl" />
+            <svg v-if="noAvatar" viewBox="0 0 30 29" id="user-circle" class="icon line" width="48" height="48"><path style="fill: none; stroke: rgb(0, 0, 0); stroke-linecap: round; stroke-linejoin: round; stroke-width: 1;" d="M12,21h0a9,9,0,0,1-9-9H3a9,9,0,0,1,9-9h0a9,9,0,0,1,9,9h0A9,9,0,0,1,12,21Zm0-6a5,5,0,0,0-5,4.5,9,9,0,0,0,9.94,0A5,5,0,0,0,12,15Zm0-8a4,4,0,1,0,4,4A4,4,0,0,0,12,7Z" id="primary"></path></svg>
+        </div>
+      </div>
+      <ul
+        tabindex="0"
+        class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+        <li>
+          <RouterLink class="justify-between" :to=link+uid>
+            <p class="text-xs" :style="{ color: isDeveloper ? 'pink' : '' }">{{ UserName }}</p>
+            <span class="badge">Profile</span>
+          </RouterLink>
+        </li>
+        <li><a>Settings</a></li>
+        <li><a v-on:click="Logout">Logout</a></li>
+      </ul>
+    </div>
       </div>
     </div>
   </header>
@@ -86,10 +110,25 @@ header {
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
+import { getUserInfo } from '@/api/userInfo.d'
+import Cookies from 'js-cookie'
+import config from '@/config/configenv.d'
+import axios from 'axios'
 
 const headerClass = ref('glass')
 const navbarClass = ref('glass')
 
+const isLogin = ref(false)
+
+const avatarUrl = ref('')
+const UserName = ref('')
+const isDeveloper = ref()
+const LoginToken = Cookies.get('LoginToken')
+const uid = ref()
+
+const noAvatar = ref(true)
+
+const link = "/user/"
 const handleScroll = () => {
   if (window.scrollY > 0) {
     headerClass.value = 'white'
@@ -97,6 +136,34 @@ const handleScroll = () => {
   } else {
     headerClass.value = 'glass'
     navbarClass.value = 'glass'
+  }
+}
+function Logout() {
+  Cookies.remove('LoginToken')
+  window.location.reload()
+}
+
+getUserInfo(LoginToken).then(res => {
+  if (res.status === 200) {
+    isLogin.value = true
+    avatarUrl.value = `${config}/api/zako/res/avatar/${res.data.uid}`
+    UserName.value = res.data.nickname
+    isDeveloper.value = res.data.isDeveloper
+    uid.value = res.data.uid
+    fetchAvatar(res.data.uid)
+  }
+})
+
+const fetchAvatar = async (uid: string) => {
+  try {
+    const response = await axios.get(`${config.apiUrl}/api/zako/res/avatar/${uid}`)
+    if (response.status === 200 && response.data) {
+      noAvatar.value = false
+    } else {
+      noAvatar.value = true
+    }
+  } catch (error) {
+    noAvatar.value = true
   }
 }
 
