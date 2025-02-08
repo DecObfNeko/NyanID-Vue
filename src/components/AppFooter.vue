@@ -1,5 +1,5 @@
 <template>
-<footer class="footer sm:footer-horizontal text-base-content p-10 glass">
+<footer class="footer sm:footer-horizontal text-base-content p-10 glass fixed-bottom">
   <aside>
     <img src="@/assets/img/logo.png" class="w-16" />
     <p class="footer-title">

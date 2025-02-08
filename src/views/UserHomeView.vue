@@ -4,7 +4,8 @@
         <div class="card-body flex flex-row items-start gap-6"> <!-- 改为横向flex布局 -->
             <div class="flex-shrink-0 avatar" to="/user">
             <div class="w-20 rounded-xl">
-              <img :src="avatarUrl" alt="User Avatar"  style=" -webkit-user-drag: none; -moz-user-drag: none; -ms-user-drag: none; -user-drag: none;" />
+              <img v-if="!noAvatar" :src="avatarUrl" alt="User Avatar"  style=" -webkit-user-drag: none; -moz-user-drag: none; -ms-user-drag: none; -user-drag: none;" />
+              <svg v-if="noAvatar" viewBox="2.5 7 20 10" id="user-circle" class="icon line" width="80" height="80"><path style="fill: none; stroke: rgb(0, 0, 0); stroke-linecap: round; stroke-linejoin: round; stroke-width: 1;" d="M12,21h0a9,9,0,0,1-9-9H3a9,9,0,0,1,9-9h0a9,9,0,0,1,9,9h0A9,9,0,0,1,12,21Zm0-6a5,5,0,0,0-5,4.5,9,9,0,0,0,9.94,0A5,5,0,0,0,12,15Zm0-8a4,4,0,1,0,4,4A4,4,0,0,0,12,7Z" id="primary"></path></svg>
             </div>
           </div>
 
@@ -29,10 +30,12 @@ import { useRouter, useRoute } from 'vue-router'
 import { ElNotification } from 'element-plus'
 import { getPublicUserInfo } from '@/api/getpubuser.d'
 import { ref } from 'vue'
+import axios from 'axios'
 
 const router = useRouter()
 const route = useRoute()
 
+const noAvatar = ref(true)
 
 const avatarUrl = ref('')
 const UserName = ref('')
@@ -44,6 +47,19 @@ const username = ref("")
 const uuid = ref('')
 uuid.value = route.params.uuid as string
 
+const fetchAvatar = async (uid: string) => {
+  try {
+    const response = await axios.get(`${config.apiUrl}/api/zako/res/avatar/${uid}`)
+    if (response.status === 200 && response.data) {
+      noAvatar.value = false
+    } else {
+      noAvatar.value = true
+    }
+  } catch (error) {
+    noAvatar.value = true
+  }
+}
+
 getPublicUserInfo(uuid.value).then(res => {
   
   if (res.status === 200) {
@@ -54,6 +70,7 @@ getPublicUserInfo(uuid.value).then(res => {
     uid.value = res.data.uid
     username.value = res.data.username
     exp.value = res.data.exp
+    fetchAvatar(res.data.uid)
   }else{
     open('Error', 'The user does not exist', 'error')
     router.push({ path: "/",replace : true })

@@ -5,7 +5,7 @@ export const register = async (uname, password, email) => {
     try {
         const response = await axios ({
             method: 'post',
-            url: `${config}/api/zako/v1/register`,
+            url: `${config.apiUrl}/api/zako/v1/register`,
             data: {
                 "uname": uname,
                 "pwd": password,

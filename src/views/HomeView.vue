@@ -70,7 +70,6 @@ const AllUserState = ref(true);
 const AllApplicationState = ref(true);
 const NumberOfEventsState = ref(true);
 
-const isLogin = ref(false);
 
 // 错误弹窗
 function open(title:any,msg:any,type:any) {

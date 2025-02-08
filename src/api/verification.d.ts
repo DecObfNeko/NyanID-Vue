@@ -5,7 +5,7 @@ export const verification = async (token) => {
     try {
         const response = await axios ({
             method: 'post',
-            url: `${config}/api/zako/v1/verification`,
+            url: `${config.apiUrl}/api/zako/v1/verification`,
             data: {
                 "code": token
             }

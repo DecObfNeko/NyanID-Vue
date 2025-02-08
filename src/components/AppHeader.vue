@@ -72,9 +72,11 @@
         <div class="dropdown dropdown-end" :hidden="!isLogin">
       <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
         <div class="w-10 rounded-full">
-          <img
+          <img 
+            v-if="!noAvatar"
             alt="Tailwind CSS Navbar component"
             :src="avatarUrl" />
+            <svg v-if="noAvatar" viewBox="0 0 30 29" id="user-circle" class="icon line" width="48" height="48"><path style="fill: none; stroke: rgb(0, 0, 0); stroke-linecap: round; stroke-linejoin: round; stroke-width: 1;" d="M12,21h0a9,9,0,0,1-9-9H3a9,9,0,0,1,9-9h0a9,9,0,0,1,9,9h0A9,9,0,0,1,12,21Zm0-6a5,5,0,0,0-5,4.5,9,9,0,0,0,9.94,0A5,5,0,0,0,12,15Zm0-8a4,4,0,1,0,4,4A4,4,0,0,0,12,7Z" id="primary"></path></svg>
         </div>
       </div>
       <ul
@@ -111,6 +113,7 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import { getUserInfo } from '@/api/userInfo.d'
 import Cookies from 'js-cookie'
 import config from '@/config/configenv.d'
+import axios from 'axios'
 
 const headerClass = ref('glass')
 const navbarClass = ref('glass')
@@ -122,6 +125,9 @@ const UserName = ref('')
 const isDeveloper = ref()
 const LoginToken = Cookies.get('LoginToken')
 const uid = ref()
+
+const noAvatar = ref(true)
+
 const link = "/user/"
 const handleScroll = () => {
   if (window.scrollY > 0) {
@@ -144,8 +150,22 @@ getUserInfo(LoginToken).then(res => {
     UserName.value = res.data.nickname
     isDeveloper.value = res.data.isDeveloper
     uid.value = res.data.uid
+    fetchAvatar(res.data.uid)
   }
 })
+
+const fetchAvatar = async (uid: string) => {
+  try {
+    const response = await axios.get(`${config.apiUrl}/api/zako/res/avatar/${uid}`)
+    if (response.status === 200 && response.data) {
+      noAvatar.value = false
+    } else {
+      noAvatar.value = true
+    }
+  } catch (error) {
+    noAvatar.value = true
+  }
+}
 
 onMounted(() => {
   window.addEventListener('scroll', handleScroll)

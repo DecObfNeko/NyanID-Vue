@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const getServerInfo = async () => {
     try {
-        const response = await axios.get(`${config}/api/zako/v2/server`);
+        const response = await axios.get(`${config.apiUrl}/api/zako/v2/server`);
         return {
             status: response.status,
             data: response.data
