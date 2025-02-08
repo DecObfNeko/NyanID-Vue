@@ -2,13 +2,14 @@
   <div class="base-300 dark:bg-base-300" v-loading.fullscreen.lock="fullscreenLoading" element-loading-text="喵喵喵? 在加载呢杂鱼awa" type="primary">
     <AppHeader #="body" html data-theme="" /> 
   <div style="height: 50px; opacity: 0;"></div>
+    <div id="section">
+    <transition name="fade" mode="out-in">
     <router-view  mode="out-in" v-slot="{ Component }" >
-       <div id="section">
-       <transition name="fade" mode="out-in">
-    <component :is="Component" />
-  </transition>
+      <component :is="Component" >
+        </component>
+    </router-view>
+    </transition>
   </div>
-</router-view>
   <AppFooter />
 </div>
 </template>
@@ -119,48 +120,52 @@ const closeFullScreen = () => {
 }
 </style>
 
-<style>
-.fade-enter-active {
-  transition: opacity 0.3s ease;
+<style>/* Fade 动画 - 更适合垂直淡入淡出效果 */
+.fade-enter-active,
+.fade-leave-active {
+  transition: 
+    opacity 0.3s ease-in-out,
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  /* 保持公共属性 */
   opacity: 1;
   transform: translateY(0);
   border: none;
-
-}
-.fade-leave-active {
-  transition: opacity 0.3s ease;
-  opacity: 0;
-  transform: translateZ(90px);
-  border: none;
-  background-color: transparent;
 }
 
 .fade-enter-from {
-  transition: opacity 0.5s ease;
   opacity: 0;
-  transform: translateY(80px);
-  transition-timing-function: ease-in-out;
-}
-.fade-leave-to {
-  opacity: 0;
-  transform: translateY(-20px);
-  transition: opacity 0.5s ease;
-  transition-timing-function: ease-out;
-  transition-property: opacity, transform;
-  border: none;
-}
-.toast-enter-active,
-.toast-leave-active {
-  transition: all 0.5s ease;
+  transform: translateY(20px); /* 更合理的起始位置 */
 }
 
-.toast-enter-from,
+.fade-leave-to {
+  opacity: 0;
+  transform: translateY(-20px); /* 保持对称运动 */
+}
+
+/* Toast 动画 - 更适合侧边滑入提示 */
+.toast-enter-active {
+  transition: 
+    opacity 0.5s ease-out,
+    transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.toast-leave-active {
+  transition: 
+    opacity 0.3s ease-in,
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.toast-enter-from {
+  opacity: 0;
+  transform: translateX(100%); /* 从右侧完全滑入 */
+}
+
 .toast-leave-to {
   opacity: 0;
-  transform: translateX(20px);
+  transform: translateX(50%) scale(0.95); /* 更自然的离开效果 */
 }
 
 .toast-move {
-  transition: transform 0.5s ease;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 </style>

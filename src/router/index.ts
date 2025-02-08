@@ -9,6 +9,7 @@ import TermsOfServiceView from '@/views/TermsOfServiceView.vue'
 
 import { createRouter, createWebHistory } from 'vue-router'
 import TeamView from '@/views/TeamView.vue'
+import FightsView from '@/views/FightsView.vue'
 
 
 const router = createRouter({
@@ -18,7 +19,7 @@ const router = createRouter({
       path: '/',
       name: 'HomeView',
       component : HomeView,
-      meta: { transition: 'fade-leave-active' },
+      meta: { transition: 'fade-enter-active' },
     },
     {
       path: '/PrivacyPolicy',
@@ -40,27 +41,37 @@ const router = createRouter({
     {
       path: '/register',
       name: 'RegisterView',
-      component: RegisterView
+      component: RegisterView,
+      meta: { transition: 'fade-leave-active' },
     },
     {
       path: '/verification/:token',
       name: 'VerificationView',
       component: VerificationView,
+      meta: { transition: 'fade-leave-active' },
     },
     {
       path: '/user/:uuid',
       name: 'UserHomeView',
       component: UserHomeView,
+      meta: { transition: 'fade-leave-active' },
     },
     {
       path: '/tos',
       name: 'TeamOfServiceView',
       component: TermsOfServiceView,
+      meta: { transition: 'fade-leave-active' },
     },
     {
       path: '/aboutus',
       name: 'TeamView',
       component: TeamView,
+      meta: { transition: 'fade-leave-active' },
+    },
+    {
+      path: '/match',
+      name: 'FightsView',
+      component: FightsView,
     }
   ]
 })
