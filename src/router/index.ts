@@ -10,6 +10,7 @@ import TermsOfServiceView from '@/views/TermsOfServiceView.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import TeamView from '@/views/TeamView.vue'
 import FightsView from '@/views/FightsView.vue'
+import ResetPwd from '@/views/ResetPwd.vue'
 
 
 const router = createRouter({
@@ -72,7 +73,13 @@ const router = createRouter({
       path: '/match',
       name: 'FightsView',
       component: FightsView,
-    }
+    },
+    {
+      path: '/resetpwd/:email',
+      name: 'ResetPwd',
+      component: ResetPwd,
+      meta: { transition: 'fade-leave-active' },
+    },
   ]
 })
 
