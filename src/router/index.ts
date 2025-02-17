@@ -11,6 +11,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import TeamView from '@/views/TeamView.vue'
 import FightsView from '@/views/FightsView.vue'
 import ResetPwd from '@/views/ResetPwd.vue'
+import UserHomeSettingView from '@/views/UserHomeSettingView.vue'
 
 
 const router = createRouter({
@@ -55,6 +56,12 @@ const router = createRouter({
       path: '/user/:uuid',
       name: 'UserHomeView',
       component: UserHomeView,
+      meta: { transition: 'fade-leave-active' },
+    },
+    {
+      path: '/usersetting/:uuid',
+      name: 'UserHomeSettingView',
+      component: UserHomeSettingView,
       meta: { transition: 'fade-leave-active' },
     },
     {

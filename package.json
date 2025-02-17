@@ -13,6 +13,7 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.0.0",
     "axios": "^1.7.9",
+    "cropperjs": "^1.6.2",
     "element-plus": "^2.9.3",
     "js-cookie": "^3.0.5",
     "pinia": "^2.1.7",

@@ -89,7 +89,11 @@
             <span class="badge">Profile</span>
           </RouterLink>
         </li>
-        <li><a>Settings</a></li>
+        <li>
+          <RouterLink :to="settinglink+uid">
+            <a>Settings</a>
+          </RouterLink>
+        </li>
         <li><a v-on:click="Logout">Logout</a></li>
       </ul>
     </div>
@@ -130,6 +134,8 @@ const uid = ref()
 const noAvatar = ref(true)
 
 const link = "/user/"
+const settinglink = "/usersetting/"
+
 const handleScroll = () => {
   if (window.scrollY > 0) {
     headerClass.value = 'white'
