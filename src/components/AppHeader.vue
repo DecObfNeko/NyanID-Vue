@@ -90,7 +90,7 @@
           </RouterLink>
         </li>
         <li>
-          <RouterLink :to="settinglink+uid">
+          <RouterLink :to="settinglink">
             <a>Settings</a>
           </RouterLink>
         </li>
@@ -134,7 +134,7 @@ const uid = ref()
 const noAvatar = ref(true)
 
 const link = "/user/"
-const settinglink = "/usersetting/"
+const settinglink = "/setting"
 
 const handleScroll = () => {
   if (window.scrollY > 0) {

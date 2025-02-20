@@ -36,11 +36,16 @@ import { ref, nextTick } from 'vue';
 import VueCropper from 'vue-cropperjs';
 import 'cropperjs/dist/cropper.css';
 import defaultAvatar from '@/assets/img/avatar.png';
+import { SetAvatar } from '@/api/SetUserAvatar.d'
+import Cookies from 'js-cookie'
 
 const selectedFile = ref(null);
 const previewImage = ref(null);
 const croppedImage = ref(null);
 const cropperRef = ref(null);
+
+const LoginToken = Cookies.get('LoginToken')
+
 
 const handleFileChange = (event) => {
   const files = event.target.files;
@@ -62,16 +67,29 @@ const handleFileChange = (event) => {
 
 const cropImage = () => {
   if (cropperRef.value) {
-    cropperRef.value.getCroppedCanvas().toBlob((blob) => {
-      const url = URL.createObjectURL(blob);
-      croppedImage.value = url;
-      console.log('裁切后的图像 URL:', url);
-      // TODO: 这里可以处理裁切后的图像上传逻辑
-    });
+    // 获取裁剪后的 canvas
+    const canvas = cropperRef.value.getCroppedCanvas();
+    
+    // 将 canvas 转换为 PNG 格式的 blob
+    canvas.toBlob((blob) => {
+      // 创建 FormData 对象
+      const formData = new FormData();
+      formData.append('avatar', blob, 'avatar.png'); // 'avatar' 是字段名，'avatar.png' 是文件名
+      
+      // 将 FormData 对象传给 API
+      SetAvatar(LoginToken, formData).then(res => {
+        console.log('头像上传结果:', res);
+      }).catch(err => { 
+        console.error('头像上传失败:', err);
+      });
+    }, 'image/png');
   }
 };
 </script>
 
 <style scoped>
-
+.cropper-container {
+  max-width: 100%;
+  height: 300px;
+}
 </style>

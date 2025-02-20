@@ -59,7 +59,7 @@ const router = createRouter({
       meta: { transition: 'fade-leave-active' },
     },
     {
-      path: '/usersetting/:uuid',
+      path: '/setting',
       name: 'UserHomeSettingView',
       component: UserHomeSettingView,
       meta: { transition: 'fade-leave-active' },
