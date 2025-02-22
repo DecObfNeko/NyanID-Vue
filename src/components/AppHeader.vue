@@ -72,11 +72,12 @@
         <RouterLink  class="btn" to="/login" v-if="!isLogin">Login</RouterLink>
         <div class="dropdown dropdown-end" :hidden="!isLogin">
       <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
-        <div class="w-10 rounded-full">
+        <div class="w-10 rounded-full avatar-transition">
           <img 
             v-if="!noAvatar"
-            alt="Tailwind CSS Navbar component"
-            :src="avatarUrl" />
+            alt="avatar"
+            :src="avatarUrl"
+            class="transition-opacity duration-300" />
             <svg v-if="noAvatar" viewBox="0 0 30 29" id="user-circle" class="icon line" width="48" height="48"><path style="fill: none; stroke: rgb(0, 0, 0); stroke-linecap: round; stroke-linejoin: round; stroke-width: 1;" d="M12,21h0a9,9,0,0,1-9-9H3a9,9,0,0,1,9-9h0a9,9,0,0,1,9,9h0A9,9,0,0,1,12,21Zm0-6a5,5,0,0,0-5,4.5,9,9,0,0,0,9.94,0A5,5,0,0,0,12,15Zm0-8a4,4,0,1,0,4,4A4,4,0,0,0,12,7Z" id="primary"></path></svg>
         </div>
       </div>
@@ -111,10 +112,23 @@ header {
   z-index: 1000;
 }
 
+.avatar-transition {
+  position: relative;
+}
+
+.avatar-transition img {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.avatar-transition img[src=''] {
+  opacity: 0;
+}
 </style>
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
+import eventBus from '@/utils/mitt.d'
 import { getUserInfo } from '@/api/userInfo.d'
 import Cookies from 'js-cookie'
 import config from '@/config/configenv.d'
@@ -173,6 +187,14 @@ const fetchAvatar = async (uid: string) => {
     noAvatar.value = true
   }
 }
+
+eventBus.on('avatar-updated', () => {
+  // 使用异步函数立即更新头像
+  if (uid.value) {
+    fetchAvatar(uid.value)
+    avatarUrl.value = `${config.apiUrl}/api/zako/res/avatar/${uid.value}?t=${new Date().getTime()}`
+  }
+})
 
 onMounted(() => {
   window.addEventListener('scroll', handleScroll)

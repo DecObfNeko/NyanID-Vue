@@ -117,6 +117,7 @@ import defaultAvatar from '@/assets/img/avatar.png';
 import { SetAvatar } from '@/api/SetUserAvatar.d'
 import Cookies from 'js-cookie'
 import { ElNotification } from 'element-plus'
+import eventBus from '@/utils/mitt.d'
 
 const selectedFile = ref(null);
 const previewImage = ref(null);
@@ -166,6 +167,7 @@ const cropImage = () => {
       SetAvatar(LoginToken, formData).then(res => {
         if (res.status === 200){
           open("Success", "Set avatar successfully", "success")
+          eventBus.emit("avatar-updated")
         } else {
           open('Error', res.data.message, 'error')
         }
