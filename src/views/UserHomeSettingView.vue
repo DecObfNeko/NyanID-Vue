@@ -53,41 +53,10 @@
               </div>
     
               <!-- 用户背景 -->
-              <div class="carousel rounded-box w-145 float-left">
-                <div class="carousel-item w-1/2">
-                  <img
-                    src="https://img.daisyui.com/images/stock/photo-1559703248-dcaaec9fab78.webp"
-                    class="w-full" />
-                </div>
-                <div class="carousel-item w-1/2">
-                  <img
-                    src="https://img.daisyui.com/images/stock/photo-1565098772267-60af42b81ef2.webp"
-                    class="w-full" />
-                </div>
-                <div class="carousel-item w-1/2">
-                  <img
-                    src="https://img.daisyui.com/images/stock/photo-1572635148818-ef6fd45eb394.webp"
-                    class="w-full" />
-                </div>
-                <div class="carousel-item w-1/2">
-                  <img
-                    src="https://img.daisyui.com/images/stock/photo-1494253109108-2e30c049369b.webp"
-                    class="w-full" />
-                </div>
-                <div class="carousel-item w-1/2">
-                  <img
-                    src="https://img.daisyui.com/images/stock/photo-1550258987-190a2d41a8ba.webp"
-                    class="w-full" />
-                </div>
-                <div class="carousel-item w-1/2">
-                  <img
-                    src="https://img.daisyui.com/images/stock/photo-1559181567-c3190ca9959b.webp"
-                    class="w-full" />
-                </div>
-                <div class="carousel-item w-1/2">
-                  <img
-                    src="https://img.daisyui.com/images/stock/photo-1601004890684-d8cbf643f5f2.webp"
-                    class="w-full" />
+              <div class="card card-side bg-base-100 w-145 float-left">
+                <div class="card-body">
+                  <h2 class="card-title">Set your background!</h2>
+                  <p>If you want to set your background!</p> 
                 </div>
               </div>
             </div>
