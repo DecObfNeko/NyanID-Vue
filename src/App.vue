@@ -23,6 +23,7 @@ import { ref, onMounted, reactive } from 'vue';
 import { ElNotification } from 'element-plus'
 import { getServerInfo } from '@/api/serverInfo.d'
 
+const isRouterActive = ref(true)
 
 const fullscreenLoading = ref(false)
 const openFullScreen = () => {

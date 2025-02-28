@@ -1,5 +1,5 @@
 const config = {
-    apiUrl: 'https://mc.nyacat.cloud:2087',
+    apiUrl: 'http://localhost:11451',
 };
 
 export default config;

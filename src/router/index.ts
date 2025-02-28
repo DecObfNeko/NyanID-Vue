@@ -11,6 +11,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import TeamView from '@/views/TeamView.vue'
 import FightsView from '@/views/FightsView.vue'
 import McServer from '@/views/McServer.vue'
+import ResetPwd from '@/views/ResetPwd.vue'
+import UserHomeSettingView from '@/views/UserHomeSettingView.vue'
 
 
 const router = createRouter({
@@ -58,6 +60,12 @@ const router = createRouter({
       meta: { transition: 'fade-leave-active' },
     },
     {
+      path: '/setting',
+      name: 'UserHomeSettingView',
+      component: UserHomeSettingView,
+      meta: { transition: 'fade-leave-active' },
+    },
+    {
       path: '/tos',
       name: 'TeamOfServiceView',
       component: TermsOfServiceView,
@@ -79,7 +87,13 @@ const router = createRouter({
       path: '/match',
       name: 'FightsView',
       component: FightsView,
-    }
+    },
+    {
+      path: '/resetpwd/:email',
+      name: 'ResetPwd',
+      component: ResetPwd,
+      meta: { transition: 'fade-leave-active' },
+    },
   ]
 })
 
