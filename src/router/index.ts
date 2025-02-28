@@ -13,6 +13,7 @@ import FightsView from '@/views/FightsView.vue'
 import McServer from '@/views/McServer.vue'
 import ResetPwd from '@/views/ResetPwd.vue'
 import UserHomeSettingView from '@/views/UserHomeSettingView.vue'
+import Null404 from '@/views/Null404.vue'
 
 
 const router = createRouter({
@@ -93,6 +94,15 @@ const router = createRouter({
       name: 'ResetPwd',
       component: ResetPwd,
       meta: { transition: 'fade-leave-active' },
+    },
+    {
+      path: "/:pathMatch(.*)*",
+      redirect:'/404',
+    },
+    {
+      path: "/404",
+      name: "NotFound",
+      component: Null404,
     },
   ]
 })

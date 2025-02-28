@@ -1,10 +1,13 @@
 <template>
-<div class="card card-border bg-base-100 w-96">
-  <div class="card-body">
-    <h2 class="card-title"><span class="loading loading-spinner loading-xl"></span></h2>
-    <p>{{ msg }}</p>
-    <div class="card-actions justify-end">
-    </div>
+<div class="card lg:card-side shadow-sm flex  md:flex-row ">
+  <div class="relative">
+    <h2 class="absolute left-[400px] top-[412px] rotate-335 rounded scale-300 footer-title" style="color: darkred;">{{ msg }}</h2>
+    <h2 class="absolute left-[400px] top-[650px] rotate-350 rounded  scale-250 footer-title" style="color: darkred;"><span class="loading loading-spinner loading-xl"></span></h2>
+    <img
+      style=" -webkit-user-drag: none; -moz-user-drag: none; -ms-user-drag: none; -user-drag: none;"
+      src="@/assets/img/Image_1740734995013.png"
+      alt="Album" />
+      
   </div>
 </div>
 </template>
@@ -40,7 +43,7 @@ onMounted(() => {
       open('Success', 'Verification success', 'success')
       setTimeout(() => {
         router.push({ path: "/login" })
-      }, 900)
+      }, 1900)
     } else {
       msg.value = "Validation failed :("
       open('Error', res.data.message, 'error')

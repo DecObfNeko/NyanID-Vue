@@ -1,8 +1,9 @@
 <template>
   <div>
+    
     <div class="hero min-h-screen">
       <div class="hero-content flex-col lg:flex-row-reverse">
-        <img src="@/assets/img/3a614988d5e2c37ff40d29e232066f86.png" :class="['max-w-sm', { 'animate-fly-in': isMounted }]" />
+        <img src="@/assets/img/3a614988d5e2c37ff40d29e232066f86.png" :class="['max-w-sm', { 'animate-fly-in': isMounted }]" style=" -webkit-user-drag: none; -moz-user-drag: none; -ms-user-drag: none; -user-drag: none;" />
         <div :class="[{ 'animate-fly-in': isMounted }]">
           <h1 class="text-5xl font-bold" style="color: azure;">NyaCat Cloud</h1>
           <p class="py-6" style="color: azure;">
@@ -13,7 +14,21 @@
             <div   v-html="serverInfo" style="color: plum;" class="transition-box"></div>
             </transition>
           </p>
-          <button class="btn btn-primary">Get Started</button>
+          <button onclick="Started.showModal()" class="btn btn-primary">Get Started</button>
+          <dialog id="Started" class="modal">
+          <div class="modal-box">
+            <form method="dialog">
+              <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+            </form>
+            <h3 class="text-lg font-bold">Hello! 这里是NAYNCAT 杂鱼喵~ </h3>
+            <div class="divider"></div>
+            <RouterLink to="/oauth2" class="py-4">我是应用程序开发者,我需要Oauth2服务</RouterLink>
+            <div class="divider">OR</div>            
+            <RouterLink to="/server" class="py-4">我是我的世界玩家,我需要了解NyaCat Cloud的Minecraft服务器</RouterLink>
+            <div class="divider"></div>
+
+          </div>
+        </dialog>
         </div>
         <transition name="el-zoom-in-bottom">
         <div class="stats-container transition-box" v-show="show">
@@ -58,6 +73,7 @@
 import { ref, onMounted } from 'vue'
 import { getServerInfo } from '@/api/serverInfo.d'
 import { ElNotification } from 'element-plus'
+import { RouterLink } from 'vue-router';
 
 // 创建响应式变量来存储服务器信息
 const serverInfo = ref('');
