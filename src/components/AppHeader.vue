@@ -15,8 +15,7 @@
       <div class="navbar-center hidden lg:flex  ">
         <ul class="menu menu-horizontal px-1">
           <li><RouterLink to="/" >HOME</RouterLink></li>
-          <li><RouterLink to="/match" >MatchViewTest</RouterLink></li>
-          <li><a>McServer</a></li>
+          <li><RouterLink to="/server" >McServer</RouterLink></li>
           <li>
             <details class="dropdown dropdown-end">
               <summary>API/应用程序接入</summary>

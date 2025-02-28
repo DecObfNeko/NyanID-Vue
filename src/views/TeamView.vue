@@ -1,13 +1,13 @@
 <template>
   <div class="container mx-auto py-8">
-    <div class="card w-full h-195 shadow-xl bg-base-100">
-      <h1 class="text-3xl font-semibold text-center mb-8 mt-10">关于我们</h1>
+    <div class="card w-full h-195 shadow-xl ">
+      <h1 class="text-3xl font-semibold text-center mb-8 mt-10" style="color: azure;">关于我们</h1>
       <p></p>
-      <p style="font-size: 35px;" class="font-semibold text-center">由一群可爱的猫猫创建的工作室DecobfnekoDev</p>
-      <p style="font-size: 35px;" class="font-semibold text-center">MahiroHackerฅ(＞﹏＜) No Dimples#1337 here :(</p>
+      <p style="font-size: 35px;color: azure;" class="font-semibold text-center">由一群可爱的猫猫创建的工作室DecobfnekoDev</p>
+      <p style="font-size: 35px;color: azure;" class="font-semibold text-center">MahiroHackerฅ(＞﹏＜) No Dimples#1337 here :(</p>
       <div class="card-body">
         <div class="grid lg:grid-cols-4 gap-4">
-          <div v-for="developer in developers" :key="developer.id" class="card bg-base-100 shadow-x">
+          <div v-for="developer in developers" :key="developer.id" class="card  shadow-x">
             <figure class="px-10">
               <img :src="developer.avatar" alt="Developer Avatar" class="rounded-xl object-cover" />
             </figure>

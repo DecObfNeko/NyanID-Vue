@@ -12,6 +12,7 @@
   </div>
   <AppFooter />
 </div>
+
 </template>
 //把页面拆成一个个component和view然后在这里引入
 

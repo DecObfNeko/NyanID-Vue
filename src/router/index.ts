@@ -10,6 +10,7 @@ import TermsOfServiceView from '@/views/TermsOfServiceView.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import TeamView from '@/views/TeamView.vue'
 import FightsView from '@/views/FightsView.vue'
+import McServer from '@/views/McServer.vue'
 
 
 const router = createRouter({
@@ -60,6 +61,12 @@ const router = createRouter({
       path: '/tos',
       name: 'TeamOfServiceView',
       component: TermsOfServiceView,
+      meta: { transition: 'fade-leave-active' },
+    },
+    {
+      path: '/server',
+      name: 'McServer',
+      component: McServer,
       meta: { transition: 'fade-leave-active' },
     },
     {
