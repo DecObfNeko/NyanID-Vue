@@ -12,8 +12,8 @@ import TeamView from '@/views/TeamView.vue'
 import FightsView from '@/views/FightsView.vue'
 import McServer from '@/views/McServer.vue'
 import ResetPwd from '@/views/ResetPwd.vue'
-import UserHomeSettingView from '@/views/UserHomeSettingView.vue'
 import Null404 from '@/views/Null404.vue'
+import UserHomeSettingView from '@/views/UserHomeSettingView.vue'
 
 
 const router = createRouter({
@@ -61,7 +61,7 @@ const router = createRouter({
       meta: { transition: 'fade-leave-active' },
     },
     {
-      path: '/setting',
+      path: '/user/setting',
       name: 'UserHomeSettingView',
       component: UserHomeSettingView,
       meta: { transition: 'fade-leave-active' },

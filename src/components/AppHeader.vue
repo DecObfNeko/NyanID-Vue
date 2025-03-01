@@ -147,7 +147,7 @@ const uid = ref()
 const noAvatar = ref(true)
 
 const link = "/user/"
-const settinglink = "/setting"
+const settinglink = "/user/setting"
 
 const handleScroll = () => {
   if (window.scrollY > 0) {
