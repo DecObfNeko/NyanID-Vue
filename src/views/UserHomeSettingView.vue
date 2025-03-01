@@ -4,7 +4,7 @@
         <!-- 原有内容 -->
         <div class="">
           <!-- 用户头像 -->
-          <div class="card bg-base-100 w-96 h-156 shadow-xl float-left">
+          <div class="card bg-base-100 w-96 h-151 shadow-xl float-left">
             <h2 class="card-title ml-5 mt-5">重置头像</h2>
             <div class="px-10 pt-10">
                 <!-- 当没有选择图片时显示默认头像 -->
@@ -45,7 +45,7 @@
                 <div class="card-body">
                   <h2 class="card-title">Reset User Nmae</h2>
                   <p>If you want to reset you user name!</p>
-                  <input type="text" class="input" placeholder="Your new name" />
+                  <input type="text" class="input" placeholder="Your new name" v-bind="newName" />
                   <div class="card-actions justify-end">
                     <button class="btn btn-primary">变更</button>
                   </div>
@@ -66,7 +66,7 @@
               <div class="card-body">
                 <h2 class="card-title">Set your sign!</h2>
                 <p>If you want to set your sign!</p>
-                <textarea class="textarea textarea-bordered" placeholder="Your sign"></textarea>
+                <textarea class="textarea textarea-bordered" placeholder="Your sign" v-bind="sign"></textarea>
                 <div class="card-actions justify-end">
                   <button class="btn btn-primary">变更</button>
                 </div>
@@ -94,6 +94,9 @@ const cropperRef = ref(null);
 
 const LoginToken = Cookies.get('LoginToken')
 
+const sign = ref('')
+const newName = ref('')
+
 const open = (title, msg, type) => {
   ElNotification({
     title: title,
@@ -102,7 +105,7 @@ const open = (title, msg, type) => {
   })
 }
 
-// 设置头像 start
+// 设置头像
 const handleFileChange = (event) => {
   const files = event.target.files;
   if (files.length > 0) {
@@ -148,11 +151,10 @@ const cropImage = () => {
     open('Error', 'You haven\'t uploaded the file yet.', 'error')
   }
 };
-// 设置头像 end
 
-// 设置用户名 start
+// 设置用户名
 
-// 设置用户名 end
+
 </script>
 
 <style scoped>
