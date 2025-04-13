@@ -24,12 +24,15 @@
                   class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow ">
                 <li>
                   <a class="justify-between">
-                    Profile
+                    Docs
                     <span class="badge">New</span>
                   </a>
                 </li>
-                <li><a>Settings</a></li>
-                <li><a>Logout</a></li>
+                <li><a class="justify-between">
+                    Developer Platform
+                    <span class="badge">New</span>
+                  </a></li>
+                <li><a>API</a></li>
               </ul>
             </details>
           </li>
@@ -46,7 +49,33 @@
         </ul>
       </div>
       <div class="navbar-end">
-        <input type="text" placeholder="SearchPlayer" class="input input-bordered w-24 md:w-auto" />
+        <div class="flex gap-4">
+        <el-autocomplete
+              v-model="state"
+              :fetch-suggestions="querySearchAsync"
+              placeholder="SearchPlayer"
+              @select="handleSelect"
+              clearable="true"
+      >
+        <template #loading>
+          <el-icon class="is-loading">
+            <svg class="circular" viewBox="0 0 20 20">
+              <g
+                class="path2 loading-path"
+                stroke-width="0"
+                style="animation: none; stroke: none"
+              >
+                <circle r="3.375" class="dot1" rx="0" ry="0" />
+                <circle r="3.375" class="dot2" rx="0" ry="0" />
+                <circle r="3.375" class="dot4" rx="0" ry="0" />
+                <circle r="3.375" class="dot3" rx="0" ry="0" />
+              </g>
+            </svg>
+          </el-icon>
+        </template>
+      </el-autocomplete>
+     </div>
+
         <label class="swap swap-rotate menu">
           <!-- this hidden checkbox controls the state -->
           <input type="checkbox" class="theme-controller" value="dark" />
@@ -68,7 +97,7 @@
               d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z" />
           </svg>
         </label>
-        <RouterLink  class="btn" to="/login" v-if="!isLogin">Login</RouterLink>
+        <RouterLink  class="btn" to="/login" :hidden="isLogin" :="isLogin1" >Login</RouterLink>
         <div class="dropdown dropdown-end" :hidden="!isLogin">
       <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
         <div class="w-10 rounded-full avatar-transition">
@@ -81,12 +110,29 @@
         </div>
       </div>
       <ul
+        :hidden="!isLogin"
         tabindex="0"
         class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
         <li>
           <RouterLink class="justify-between" :to=link+uid>
             <p class="text-xs" :style="{ color: isDeveloper ? 'pink' : '' }">{{ UserName }}</p>
             <span class="badge">Profile</span>
+          </RouterLink>
+        </li>
+        <li>
+          <RouterLink class="justify-between" to="/cgi-bin/user/home">
+            <p class="text-xs" >UserHome</p>
+            
+          </RouterLink>
+        </li>
+        <li>
+          <RouterLink class="justify-between" to="/cgi-bin/user/friend">
+            <p class="text-xs" >Friend</p>
+          </RouterLink>
+        </li>
+        <li>
+          <RouterLink class="justify-between" to="/cgi-bin/user/friend">
+            <p class="text-xs" >Neko Club</p>
           </RouterLink>
         </li>
         <li>
@@ -123,20 +169,90 @@ header {
 .avatar-transition img[src=''] {
   opacity: 0;
 }
+.circular {
+  display: inline;
+  height: 30px;
+  width: 30px;
+  animation: loading-rotate 2s linear infinite;
+}
+.path {
+  animation: loading-dash 1.5s ease-in-out infinite;
+  stroke-dasharray: 90, 150;
+  stroke-dashoffset: 0;
+  stroke-width: 2;
+  stroke: var(--el-color-primary);
+  stroke-linecap: round;
+}
+.loading-path .dot1 {
+  transform: translate(3.75px, 3.75px);
+  fill: var(--el-color-primary);
+  animation: custom-spin-move 1s infinite linear alternate;
+  opacity: 0.3;
+}
+.loading-path .dot2 {
+  transform: translate(calc(100% - 3.75px), 3.75px);
+  fill: var(--el-color-primary);
+  animation: custom-spin-move 1s infinite linear alternate;
+  opacity: 0.3;
+  animation-delay: 0.4s;
+}
+.loading-path .dot3 {
+  transform: translate(3.75px, calc(100% - 3.75px));
+  fill: var(--el-color-primary);
+  animation: custom-spin-move 1s infinite linear alternate;
+  opacity: 0.3;
+  animation-delay: 1.2s;
+}
+.loading-path .dot4 {
+  transform: translate(calc(100% - 3.75px), calc(100% - 3.75px));
+  fill: var(--el-color-primary);
+  animation: custom-spin-move 1s infinite linear alternate;
+  opacity: 0.3;
+  animation-delay: 0.8s;
+}
+@keyframes loading-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes loading-dash {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -40px;
+  }
+  100% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -120px;
+  }
+}
+@keyframes custom-spin-move {
+  to {
+    opacity: 1;
+  }
+}
 </style>
+
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import eventBus from '@/utils/mitt.d'
-import { getUserInfo } from '@/api/userInfo.d'
+import { getUserInfo,SearchUser } from '@/api/netcore.d'
 import Cookies from 'js-cookie'
 import config from '@/config/configenv.d'
 import axios from 'axios'
+import { ElMessage } from 'element-plus'
+import router from '@/router'
 
 const headerClass = ref('glass')
 const navbarClass = ref('glass')
 
 const isLogin = ref(false)
+const isLogin1= ref([])
+
 
 const avatarUrl = ref('')
 const UserName = ref('')
@@ -160,9 +276,16 @@ const handleScroll = () => {
 }
 function Logout() {
   Cookies.remove('LoginToken')
-  window.location.reload()
+  open('Logout Success', 'success')
+  isLogin.value = false
 }
 
+const open = (msg: any, type: any) => {
+  ElMessage({
+    message: msg,
+    type: type,
+  })
+}
 getUserInfo(LoginToken).then(res => {
   if (res.status === 200) {
     isLogin.value = true
@@ -202,4 +325,78 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll)
 })
+onMounted(() => {
+  getUserInfo(LoginToken).then(res => {
+  if (res.status === 200) {
+    isLogin.value = true
+    avatarUrl.value = `${config.apiUrl}/api/zako/res/avatar/${res.data.uid}`
+    UserName.value = res.data.nickname
+    isDeveloper.value = res.data.isDeveloper
+    uid.value = res.data.uid
+    fetchAvatar(res.data.uid)
+  }
+})   
+});
+
+interface UserSuggestion {
+  value: string
+  uid: string
+}
+
+// 组件状态
+const state = ref('')
+const loading = ref(false)
+let currentRequest: AbortController | null = null
+
+// 自动完成处理逻辑
+const querySearchAsync = async (queryString: string, cb: (arg: UserSuggestion[]) => void) => {
+
+  try {
+    loading.value = true
+    // 取消前一个请求
+    if (currentRequest) {
+      currentRequest.abort()
+    }
+    currentRequest = new AbortController()
+
+    // 空值处理
+    if (!queryString.trim()) {
+      cb([])
+      return
+    }
+    // 调用封装的SearchUser方法
+    const { status, data } = await SearchUser(queryString)
+
+    if (status === 200) {
+      cb(data)
+      loading.value = false
+    } else {
+      setTimeout(() => {
+        loading.value = true
+        ElMessage.error(`搜索失败 (状态码: ${status}用户不存在)`)
+        cb([])
+      }, 350)
+    }
+  } catch (error: any) {
+    if (error.name === 'AbortError') {
+      console.log('请求已取消')
+    } else {
+      console.error('搜索请求异常:', error)
+      ElMessage.error('搜索服务不可用')
+    }
+    cb([])
+  } finally {
+    loading.value = false
+    currentRequest = null
+  }
+}
+
+// 选择处理
+const handleSelect = (item: UserSuggestion) => {
+  console.log('选中用户:', item.value)
+  if (item.uid) {
+    router.push(`/user/${item.uid}`)
+    // window.open(item.uid, '_blank')
+  }
+}
 </script>

@@ -43,7 +43,7 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { ElNotification } from 'element-plus'
 import Cookies from 'js-cookie'
-import { register } from '@/api/register.d'
+import { register } from '@/api/netcore.d'
 
 const email = ref('')
 const password = ref('')

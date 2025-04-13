@@ -71,7 +71,7 @@
 </style>
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { getServerInfo } from '@/api/serverInfo.d'
+import { getServerInfo } from '@/api/netcore.d'
 import { ElNotification } from 'element-plus'
 import { RouterLink } from 'vue-router';
 

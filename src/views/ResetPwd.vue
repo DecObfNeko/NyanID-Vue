@@ -33,7 +33,7 @@
 <script setup lang="ts" name="ResetPwd">
 import { ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router'
-import { ResetPwd } from '@/api/ResetPwd.d'
+import { ResetPwd } from '@/api/netcore.d'
 import { ElNotification } from 'element-plus'
 
 const router = useRouter()

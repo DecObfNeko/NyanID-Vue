@@ -1,63 +1,70 @@
 <template>
     <div class="mr-45">
-      <div class="container mx-auto px-4">
-        <!-- 小窗口 -->
-
-        <!-- 头像重置窗口 -->
-        <dialog id="avatar" class="modal">
-        <div class="modal-box overflow-x-auto">
-          <form method="dialog">
-            <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-          </form>
-          <h3 class="text-lg font-bold">重置头像</h3>
-          <!-- 用户头像 -->
-                <div class="card bg-base-100 w-95 shadow-xl">
-                  <div :hidden="!previewImage" class="px-10 pt-10">
+             <!-- 头像重置窗口 -->
+                <el-dialog
+                  v-model="avatarDialogVisible"
+                  title="重置头像"
+                  width="500"
+                  >         
+                 <div class="card flex">
+                  <div class="px-10 pt-10">
                       <!-- 当没有选择图片时显示默认头像 -->
-                      <img v-if="!previewImage" :hidden="!previewImage" class="avatar-preview"  alt="默认头像" />
-                          
-                      <!-- 当选择图片后显示 VueCropper -->
-                      <div v-else class="cropper-container">
-                        <VueCropper
-                          ref="cropperRef"
-                          :src="previewImage"
-                          :aspect-ratio="1"
-                          :view-mode="1"
-                          :background="false"
-                          :fixed-box="false"
-                          :can-move="true"
-                          :can-scale="true"
-                          :auto-crop-area="1"
-                          @change="handleFileChange" accept="image/*"
-                        />
-                      </div>
-                  </div>
-                  <div class="card-body mt-5">
-                    <fieldset class="fieldset">
-                      <legend class="fieldset-legend">Pick a file</legend>
-                      <input type="file" @change="handleFileChange" accept="image/*" class="file-input file-input-sm w-full max-w-xs" />
-                      <label class="fieldset-label">Max size 2MB</label>
-                    </fieldset>
-                    <div class="card-actions justify-end mt-5">
-                      <button class="btn" :hidden="!previewImage" @click="cropImage">
-                        变更
-                      </button>
-                    </div>
-                  </div>
-                </div>
-        </div>
-      </dialog>
+                      <label v-if="!previewImage" :hidden="previewImage" class="swap swap-flip text-9xl flex">
+                        <input type="checkbox" />
 
-      <!-- 绑定Minecraft账户窗口 -->
+                        <div class="swap-on">😈</div>
+                        <div class="swap-off">😇</div>
+                      </label>
+                              
+                          <!-- 当选择图片后显示 VueCropper -->
+                          <div  v-else class="cropper-container flex justify-center">
+                            <VueCropper
+                              ref="cropperRef"
+                              :src="previewImage"
+                              :aspect-ratio="1"
+                              :view-mode="1"
+                              :background="false"
+                              :fixed-box="false"
+                              :can-move="true"
+                              :can-scale="true"
+                              :auto-crop-area="1"
+                              @change="handleFileChange" accept="image/*"
+                            />
+                          </div>
+                      </div>
+                      <div class="card-body mt-5">
+                        <fieldset class="fieldset">
+                          <legend class="fieldset-legend">Pick a file</legend>
+                          <input type="file" @change="handleFileChange" accept="image/*" class="file-input file-input-sm w-full max-w-xs" />
+                          <label class="fieldset-label">Max size 2MB</label>
+                        </fieldset>
+                      </div>
+                    </div>
+              <template #footer>
+                <div class="dialog-footer">
+                  <el-button @click="avatarDialogVisible = false">Cancel</el-button>
+                  <el-button type="primary" :hidden="!previewImage" @click="cropImage">
+                    Confirm
+                  </el-button>
+                </div>
+              </template>
+            </el-dialog>
+<!-- 绑定Minecraft账户窗口 -->
       <dialog id="BindMinecraft" class="modal">
         <div class="modal-box">
           <form method="dialog">
             <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
           </form>
           <h3 class="text-lg font-bold">Bind your Minecraft account</h3>
-          <p class="py-4">请在Minecraft服务器中输入指令 /bindwebaccount 获取授权码</p>
-          <input type="text" class="input float-left" placeholder="Code" />
-          <button class="btn " onclick=" ">Bind</button>
+          <p :hidden="BmaNotNull()" class="py-4">请在Minecraft服务器中输入指令 /bindweb 获取授权码</p>
+          <p :hidden="!BmaNotNull()" class="py-4">您已绑定您的Minecraft账户,若要解绑,请在Minecraft服务器中输入指令 /unbindweb 来进行解绑操作</p>
+          <div class="avatar">
+          <div class="w-10 rounded-xl">
+            <img :src="Link + mcuid" />
+            </div>
+          </div>
+          <input type="text" class="input float-left" v-model="code" :placeholder="mcuid" :disabled="BmaNotNull()" />
+          <button class="btn" :hidden="BmaNotNull()" :onclick="BindMcAccount" >Bind</button>
         </div>
       </dialog>
 
@@ -212,12 +219,12 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
           </svg>
           <p class="py-1 menu-title footer-title" style="color: red;">Warning, you have a one-week period to reverse the freezing of your account, after which your account will be permanently deleted!!!!! 杂鱼喵~</p>
-          <p class="py-1 menu-title footer-title" style="color: red;">We will handle your residual privacy data in accordance with the<RouterLink class="py-1 menu-title footer-title" style="color: red;" to="PrivacyPolicy">P̲r̲i̲v̲a̲c̲y̲ A̲g̲r̲e̲e̲m̲e̲n̲t̲</RouterLink>Pages 3</p>
+          <p class="py-1 menu-title footer-title" style="color: red;">We will handle your residual privacy data in accordance with the<RouterLink class="py-1 menu-title footer-title" style="color: red;" to="/PrivacyPolicy">P̲r̲i̲v̲a̲c̲y̲ A̲g̲r̲e̲e̲m̲e̲n̲t̲</RouterLink>Pages 3</p>
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current float-left" fill="none" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
           </svg>
           <p class="py-1 menu-title footer-title" style="color: red;">警告，您有一周的时间来撤销对您账户的冻结，之后您的账户将被永久删除!!!!! 杂鱼喵~</p>
-          <p class="py-1 menu-title footer-title" style="color: red;">我们将根据<RouterLink class="py-1 menu-title footer-title" style="color: red;" to="PrivacyPolicy">P̲r̲i̲v̲a̲c̲y̲ A̲g̲r̲e̲e̲m̲e̲n̲t̲</RouterLink>Pages 3处理您的隐私数据。</p>  
+          <p class="py-1 menu-title footer-title" style="color: red;">我们将根据<RouterLink class="py-1 menu-title footer-title" style="color: red;" to="/PrivacyPolicy">P̲r̲i̲v̲a̲c̲y̲ A̲g̲r̲e̲e̲m̲e̲n̲t̲</RouterLink>Pages 3处理您的隐私数据。</p>  
           <form method="dialog">
           <button class="btn " style="color: red;" onclick="Freezec.showModal(); ">Freeze</button>
           </form>
@@ -244,7 +251,7 @@
       </dialog>
 
 
-
+      <div class="container mx-auto px-4">
         <!-- 原有内容 -->
             
         <div class="float-right">
@@ -266,7 +273,7 @@
           
                   <h2 class="card-title" style="color: white;">Set your sign!</h2>
                   <p >If you want to set your sign!</p>
-                  <textarea v-model="newdescription" class="textarea textarea-bordered" :placeholder="description"></textarea>
+                  <textarea v-model="newdescription" class="textarea textarea-bordered" :placeholder="description" clearable></textarea>
            
 
                 <button class="btn btn-neutral mt-4 w-25" :onclick="changeuserInfo">Sava</button>
@@ -280,10 +287,10 @@
             <div class="card">
               <label class="fieldset-label card-title " style="color: white;">绑定Minecraft账户:</label>
               <button class="btn btn-neutral flex-1" onclick="BindMinecraft.showModal()">BindMinecraft</button>
-
-            <label class="fieldset-label card-title " style="color: white;">重置头像:</label>
-            <button class="btn btn-neutral flex-1" onclick="avatar.showModal()">Avatar</button>
            
+              <label class="fieldset-label card-title " style="color: white;">重置头像:</label>
+              <button class="btn btn-neutral flex-1" @click="avatarDialogVisible = true">Avatar</button>
+
               <label class="fieldset-label card-title " style="color: white;">授权服务:</label>
               <button class="btn btn-neutral flex-1" onclick="Authorized.showModal()">Authorized Services</button>
 
@@ -307,56 +314,77 @@
 import { ref, nextTick, inject, onMounted } from 'vue';
 import VueCropper from 'vue-cropperjs';
 import 'cropperjs/dist/cropper.css';
-import { SetAvatar } from '@/api/SetUserAvatar.d'
 import Cookies from 'js-cookie'
 import { useRouter } from 'vue-router'
 import { ElNotification } from 'element-plus'
 import eventBus from '@/utils/mitt.d'
-import { getUserInfo } from '@/api/userInfo.d'
-import { SetUserName } from '@/api/SetUsername.d'
-import { SetNickName } from '@/api/SetNickName.d';
-import { SetSign } from '@/api/Setsign.d';
+import { SetNickName, BindMCAccount, SetUserName, getUserInfo, SetAvatar, SetSign } from '@/api/netcore.d';
 
 const selectedFile = ref(null);
 const previewImage = ref(null);
 const cropperRef = ref(null);
 
+
+const avatarDialogVisible = ref(false)
+
+
+
 const LoginToken = Cookies.get('LoginToken')
 
+const code = ref('')
 const nickname = ref([])
 const description = ref([])
 const username = ref([])
+const havebma = ref([])
+const mcuid = ref([])
 
 const newuserName = ref([])
 const newnickname = ref([])
 const newdescription = ref([])
+const Link = "https://visage.surgeplay.com/face/64/"
+
+
+
+const BindMcAccount = () => {
+  BindMCAccount(code.value, LoginToken).then(res => {
+    if (res.status === 200) {
+      open('Success', 'Your Minecraft Account has been successfully bind.', 'success')
+      setTimeout(() => {
+        checkLoginToken()
+      }, 2000)
+    } else {
+      open('Error', 'Your Minecraft Account has not been bind.', 'error')
+    }
+  })
+}
 
 
 function changeuserInfo() {
   if (newuserName.value === username.value || newuserName.value.length === 0) {
-  }else{
-       SetUserName(newuserName.value,LoginToken).then(res => {
+  } else {
+    SetUserName(newuserName.value, LoginToken).then(res => {
       if (res.status === 200) {
         open('Success', 'Your username has been successfully changed.', 'success')
         setTimeout(() => {
-          window.location.reload()
-          }, 2000)
-      }else{
+          checkLoginToken()
+        }, 2000)
+      } else {
         open('Error', 'Your username has not been changed.', 'error')
       }
     })
   }
 
 
+
   if (newnickname.value === nickname.value || newnickname.value.length === 0) {
-  }else{
-    SetNickName(newnickname.value,LoginToken).then(res => {
+  } else {
+    SetNickName(newnickname.value, LoginToken).then(res => {
       if (res.status === 200) {
         open('Success', 'Your nickname has been successfully changed.', 'success')
         setTimeout(() => {
-          window.location.reload()
-          }, 2000)
-      }else{
+          checkLoginToken()
+        }, 2000)
+      } else {
         open('Error', 'Your nickname has not been changed.', 'error')
       }
     })
@@ -364,20 +392,26 @@ function changeuserInfo() {
 
 
   if (newdescription.value === description.value || newdescription.value.length === 0) {
-  }else{
-      SetSign(newdescription.value,LoginToken).then(res => {
+  } else {
+    SetSign(newdescription.value, LoginToken).then(res => {
       if (res.status === 200) {
         open('Success', 'Your description has been successfully changed.', 'success')
         setTimeout(() => {
-          window.location.reload()
-          }, 2000)
-      }else{
+          checkLoginToken()
+        }, 2000)
+      } else {
         open('Error', 'Your description has not been changed.', 'error')
       }
     })
   }
 
-  }
+}
+
+
+
+
+
+
 const ConfirmAccountFreeze = ref([])
 
 const router = useRouter()
@@ -386,22 +420,28 @@ onMounted(() => {
   checkLoginToken()
 })
 
-
-// 检查是否存在 LoginToken，如果存在则跳转到主页
-const isLogin = ref()
 function checkLoginToken() {
-getUserInfo(LoginToken).then(res => {
-  if (res.status === 200) {
-    nickname.value = res.data.nickname
-    description.value = res.data.description
-    username.value = res.data.username
-    isLogin.value = false
-  }else{
-    Cookies.remove('LoginToken')
-    window.location.href = "/";
-  }
-})
+  getUserInfo(LoginToken).then(res => {
+    if (res.status === 200) {
+      nickname.value = res.data.nickname
+      description.value = res.data.description
+      username.value = res.data.username
+      havebma.value = res.data.bma
+      mcuid.value = res.data.mcuid
+    } else {
+      Cookies.remove('LoginToken')
+      window.location.href = "/";
+    }
+  })
 
+}
+
+function BmaNotNull() {
+  if (havebma.value === true) {
+    return true
+  } else {
+    return false
+  }
 }
 
 
@@ -415,17 +455,17 @@ const open = (title, msg, type) => {
 
 function ConfirmDeleteAccount() {
   const trx = 'DELETE MY ACCOUNT'
-  if(trx === ConfirmAccountFreeze.value){
+  if (trx === ConfirmAccountFreeze.value) {
     Cookies.remove('LoginToken')
     open('Success', 'Your account has been successfully frozen.', 'success')
     setTimeout(() => {
       window.location.reload()
-      }, 2000)
-  }else{
+    }, 2000)
+  } else {
     open('Error', 'Incorrect input, please try again.', 'error')
     setTimeout(() => {
       window.location.reload()
-      }, 1000)
+    }, 1000)
   }
 }
 
@@ -465,6 +505,10 @@ const cropImage = () => {
       // 将 FormData 对象传给 API
       SetAvatar(LoginToken, formData).then(res => {
         if (res.status === 200) {
+          cropperRef.value = null;
+          previewImage.value = null;
+          selectedFile.value = null;
+
           open("Success", "Set avatar successfully", "success")
           eventBus.emit("avatar-updated")
         } else {

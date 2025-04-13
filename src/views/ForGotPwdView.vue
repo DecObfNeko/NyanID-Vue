@@ -38,7 +38,7 @@
   
 <script setup lang="ts" name="ForgotPasswordView">
 import { ref } from 'vue';
-import { ForGotPwd } from '@/api/ForGotpwd.d'
+import { ForGotPwd } from '@/api/netcore.d'
 import { ElNotification } from 'element-plus'
 import { useRouter } from 'vue-router'
 

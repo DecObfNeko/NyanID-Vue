@@ -1,27 +1,32 @@
 <template html>
-  <div class="base-300 dark:bg-base-300" v-loading.fullscreen.lock="fullscreenLoading" element-loading-text="喵喵喵? 在加载呢杂鱼awa" type="primary">
-    <AppHeader #="body" html data-theme="" /> 
-  <div style="height: 50px; opacity: 0;"></div>
-    <div id="section">
-    <transition name="fade" mode="out-in">
-    <router-view  mode="out-in" v-slot="{ Component }" >
-      <component :is="Component" >
-        </component>
-    </router-view>
-    </transition>
-  </div>
-  <AppFooter />
-</div>
+  <div class="base-300 dark:bg-base-300" v-loading.fullscreen.lock="fullscreenLoading" 
+       element-loading-text="喵喵喵? 在加载呢杂鱼awa" type="primary">
+    <AppHeader #="body" html data-theme="" :key="Refs"/> 
 
+    <div style="height: 50px; opacity: 0;"></div>
+
+    <div id="section">
+      <router-view v-slot="{ Component }">
+        <transition name="fade" mode="out-in">
+          <component :is="Component" :key="$route.fullPath" />
+        </transition>
+      </router-view>
+    </div>
+
+    <AppFooter />
+  </div>
 </template>
-//把页面拆成一个个component和view然后在这里引入
 
 <script name="App" lang="ts" setup>
 import AppHeader from '@/components/AppHeader.vue';
 import AppFooter from '@/components/AppFooter.vue';
-import { ref, onMounted, reactive } from 'vue';
+import { ref, onMounted } from 'vue';
 import { ElNotification } from 'element-plus'
-import { getServerInfo } from '@/api/serverInfo.d'
+import { getServerInfo } from '@/api/netcore.d'
+
+import Cookies from 'js-cookie';
+
+const Refs = ref(Cookies.get('LoginToken'))
 
 const isRouterActive = ref(true)
 
@@ -53,7 +58,9 @@ const closeFullScreen = () => {
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠀⠚⠛⠛⠋⠘⠁⠛⠛⠋⠘⠛⠛⠓⠋⠀⠘⠃⠛⠀⠘⠛⠛⠘⠁⠘⠃⠛⠀⠛⠋⠀⠛⠛⠛⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
     NyanID - Vue3 DevReBuild 0.3v                      我是玩蔚蓝档案的
       `);}, 200);
-  
+
+
+    
           };
 
 
@@ -91,7 +98,7 @@ const closeFullScreen = () => {
 
     const randomImg = async () => {
       // let randomint = Math.floor(Math.random() * 31) + 1;
-      const randomint = 1;
+      const randomint = 4;
       try {
         let m = await import(`@/assets/rimages/${randomint}.png`);
         imgUrl.value = m.default;

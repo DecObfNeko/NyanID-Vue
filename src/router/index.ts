@@ -1,19 +1,20 @@
-import LoginView from '@/views/LoginView.vue'
 import HomeView from '@/views/HomeView.vue'
+import PrivacyPolicyView from '@/views/stt/PrivacyPolicyView.vue'
+import LoginView from '@/views/LoginView.vue'
 import ForGotPwdView from '@/views/ForGotPwdView.vue'
-import PrivacyPolicyView from '@/views/PrivacyPolicyView.vue'
 import RegisterView from '@/views/RegisterView.vue'
 import VerificationView from '@/views/VerificationView.vue'
 import UserHomeView from '@/views/UserHomeView.vue'
-import TermsOfServiceView from '@/views/TermsOfServiceView.vue'
+import UserHomeSettingView from '@/views/UserHomeSettingView.vue'
+import TermsOfServiceView from '@/views/stt/TermsOfServiceView.vue'
+import McServer from '@/views/mc/McServer.vue'
+import TeamView from '@/views/stt/TeamView.vue'
+import FightsView from '@/views/mc/FightsView.vue'
+import ResetPwd from '@/views/ResetPwd.vue'
+import E404 from '@/views/stt/E404.vue'
 
 import { createRouter, createWebHistory } from 'vue-router'
-import TeamView from '@/views/TeamView.vue'
-import FightsView from '@/views/FightsView.vue'
-import McServer from '@/views/McServer.vue'
-import ResetPwd from '@/views/ResetPwd.vue'
-import Null404 from '@/views/Null404.vue'
-import UserHomeSettingView from '@/views/UserHomeSettingView.vue'
+
 
 
 const router = createRouter({
@@ -102,7 +103,7 @@ const router = createRouter({
     {
       path: "/404",
       name: "NotFound",
-      component: Null404,
+      component: E404,
     },
   ]
 })

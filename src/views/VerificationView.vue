@@ -18,7 +18,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { verification } from '@/api/verification.d'
+import { verification } from '@/api/netcore.d'
 import { ElNotification } from 'element-plus'
 const router = useRouter()
 const route = useRoute()

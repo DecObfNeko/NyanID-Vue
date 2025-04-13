@@ -38,34 +38,34 @@
 
 
 <script setup lang="ts" name="LoginView">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { login } from '@/api/login.d'
+import { login,getUserInfo } from '@/api/netcore.d'
 import { ElNotification } from 'element-plus'
 import Cookies from 'js-cookie'
-import { getUserInfo } from '@/api/userInfo.d'
 
 const email = ref('')
 const password = ref('')
-
 const router = useRouter()
+
+onMounted(() => {
+getUserInfo(LoginToken).then(res => {
+  if (res.status === 200) {
+    isLogin1.value = false
+    open('Error', 'You are already logged in', 'error')
+    router.push({ path: "/",replace : true })
+  }else{
+    Cookies.remove('LoginToken')
+    isLogin1.value = true
+  }
+})    
+
+});
 
 // 检查是否存在 LoginToken，如果存在则跳转到主页
 const LoginToken = Cookies.get('LoginToken')
-const isLogin = ref()
-getUserInfo(LoginToken).then(res => {
-  if (res.status === 200) {
-    isLogin.value = false
-  }else{
-    Cookies.remove('LoginToken')
-    isLogin.value = true
-  }
-})
+const isLogin1 = ref()
 
-if (isLogin.value) {
-  open('Error', 'You are already logged in', 'error')
-  router.push({ path: "/",replace : true })
-}
 
 function open(title: any, msg: any, type: any) {
   ElNotification({
@@ -97,7 +97,7 @@ const Login = () => {
       open('Success', 'Login successful', 'success')
       setTimeout(() => {
       window.location.href = "/";
-      }, 500)
+      }, 300)
     } else {
       open('Error', res.data.message, 'error')
     }
@@ -106,15 +106,4 @@ const Login = () => {
     open('Error', 'An error occurred', 'error')
   })
 }
-
-
-
 </script>
-
-
-<style scoped>
-
-
-
-
-</style>

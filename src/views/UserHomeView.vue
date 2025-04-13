@@ -1,26 +1,28 @@
 <template>
-    <div class="md:col-span-1">
-    <div class="card bg-base-100 shadow-xl">
-        <div class="card-body flex flex-row items-start gap-6"> <!-- 改为横向flex布局 -->
-            <div class="flex-shrink-0 avatar" to="/user">
-            <div class="w-20 rounded-xl">
-              <img v-if="!noAvatar" :src="avatarUrl" alt="User Avatar"  style=" -webkit-user-drag: none; -moz-user-drag: none; -ms-user-drag: none; -user-drag: none;" />
-              <svg v-if="noAvatar" viewBox="2.5 7 20 10" id="user-circle" class="icon line" width="80" height="80"><path style="fill: none; stroke: rgb(0, 0, 0); stroke-linecap: round; stroke-linejoin: round; stroke-width: 1;" d="M12,21h0a9,9,0,0,1-9-9H3a9,9,0,0,1,9-9h0a9,9,0,0,1,9,9h0A9,9,0,0,1,12,21Zm0-6a5,5,0,0,0-5,4.5,9,9,0,0,0,9.94,0A5,5,0,0,0,12,15Zm0-8a4,4,0,1,0,4,4A4,4,0,0,0,12,7Z" id="primary"></path></svg>
-            </div>
-          </div>
+  <div class="md:col-span-1 wave-container">
+      <div class="card bg-base-100 shadow-xl">
+          <div class="card-body flex flex-row items-start gap-6">
+              <div class="avatar">
+              <div class="w-24 rounded-xl">
+                      <img :src="noAvatar ? davatar : avatarUrl" alt="User Avatar" style="-webkit-user-drag: none;">
+                  </div>
+               </div>
 
-            <!-- 内容部分 -->
-            <div class="flex-1 items-baseline gap-2">
-                <h2 class="card-title mt-4" :style="{ color: isDeveloper ? 'pink' : '' }">{{ UserName }}</h2>
-                <img src="@/assets/img/dev.png" :hidden="!isDeveloper" class="w-4 h-4 translate-y-[-21px] translate-x-[150px] opacity-95 hover:opacity-100 transition-opacity" style=" -webkit-user-drag: none; -moz-user-drag: none; -ms-user-drag: none; -user-drag: none;">
-                <p class="text-sm">{{ description }}</p>
+              <!-- 内容部分 -->
+              <div class="flex-1 items-baseline gap-2">
+                  <h2 class="card-title mt-1" :style="{ color: isDeveloper ? 'pink' : '' }">{{ UserName }}</h2>
+                  <p :hidden="!isDeveloper" class="developer-text">
+                      The developer identity has been verified.
+                  </p>
+                  <img src="@/assets/img/dev.png" :hidden="!isDeveloper" class="w-4 h-4 translate-y-[-13px] translate-x-[0px] opacity-95 hover:opacity-100 transition-opacity" style=" -webkit-user-drag: none; -moz-user-drag: none; -ms-user-drag: none; -user-drag: none;" >
+                <p class="text-sm">个性签名: {{ description }}</p>
                 <p class="text-xs text-gray-500 mt-1">uid: {{uid}} · Username: {{ username }}</p>
                 <p class="text-xs text-gray-500 mt-1">Level: {{exp/2000}}</p>
 
-            </div>
-        </div>
-    </div>
-</div>
+              </div>
+          </div>
+      </div>
+  </div>
 </template>
 
 
@@ -28,9 +30,10 @@
 import config from '@/config/configenv.d'
 import { useRouter, useRoute } from 'vue-router'
 import { ElNotification } from 'element-plus'
-import { getPublicUserInfo } from '@/api/getpubuser.d'
+import { getPublicUserInfo } from '@/api/netcore.d'
 import { ref } from 'vue'
 import axios from 'axios'
+import davatar from "@/assets/img/avatar.png"
 
 const router = useRouter()
 const route = useRoute()
@@ -46,6 +49,8 @@ const exp = ref()
 const username = ref("")
 const uuid = ref('')
 uuid.value = route.params.uuid as string
+
+
 
 const fetchAvatar = async (uid: string) => {
   try {
@@ -89,3 +94,24 @@ function open(title: any, msg: any, type: any) {
 
 
 </script>
+
+<style scoped>
+/* 动态RGB文字动画 */
+@keyframes rgb-wave {
+    0% { color: rgb(255, 0, 0); }
+    33% { color: rgb(0, 255, 0); }
+    66% { color: rgb(0, 0, 255); }
+    100% { color: rgb(255, 0, 0); }
+}
+
+.developer-text {
+    animation: rgb-wave 3s linear infinite;
+    -webkit-animation: rgb-wave 3s linear infinite;
+    transform: translate(20px, 6px);
+    opacity: 0.95;
+    transition: opacity 0.5s;
+}
+
+
+</style>
+
