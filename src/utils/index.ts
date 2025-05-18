@@ -4,14 +4,14 @@ import zh from './../locales/zh.json'
 import ja from './../locales/ja.json'
 import ko from './../locales/ko.json'
 
+const messages = { en, zh, ja, ko };
+type SupportedLocale = 'en' | 'zh' | 'ja' | 'ko';
 
-const messages = { en, zh, ja, ko }
-
-export default createI18n({
+const i18n = createI18n<{}, SupportedLocale>({
   legacy: false,
-  locale: 'zh',
-  fallbackLocale: 'zh',
-  messages,
-  fallbackWarn: false,
-  missingWarn: false
-})
+  locale: 'en',
+  fallbackLocale: 'en',
+  messages
+});
+
+export default i18n;
