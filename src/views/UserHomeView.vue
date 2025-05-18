@@ -96,7 +96,6 @@ function open(title: any, msg: any, type: any) {
 </script>
 
 <style scoped>
-/* 动态RGB文字动画 */
 @keyframes rgb-wave {
     0% { color: rgb(255, 0, 0); }
     33% { color: rgb(0, 255, 0); }

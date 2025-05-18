@@ -60,7 +60,7 @@ const developers = ref([
   },
   {
     id: 5,
-    avatar: "/src/assets/img/96ff6904e5b896ad70475440b10b530821492d0b.jpg",
+    avatar: "@/assets/img/96ff6904e5b896ad70475440b10b530821492d0b.jpg",
     name: '顾月辞_',
     title: 'Illustration',
     namecolor: 'skyblue',

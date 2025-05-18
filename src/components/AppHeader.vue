@@ -14,22 +14,22 @@
 
       <div class="navbar-center hidden lg:flex  ">
         <ul class="menu menu-horizontal px-1">
-          <li><RouterLink to="/" >HOME</RouterLink></li>
-          <li><RouterLink to="/server" >McServer</RouterLink></li>
+          <li><RouterLink to="/" >{{ $t('AppHeader-home') }}</RouterLink></li>
+          <li><RouterLink to="/server" >Mc{{ $t('AppHeader-server') }}</RouterLink></li>
           <li>
             <details class="dropdown dropdown-end">
-              <summary>API/应用程序接入</summary>
+              <summary>{{ $t('AppHeader-api') }}</summary>
               <ul
                   tabindex="0"
                   class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow ">
                 <li>
                   <a class="justify-between">
-                    Docs
+                    {{ $t('AppHeader-api-docs') }}
                     <span class="badge">New</span>
                   </a>
                 </li>
                 <li><a class="justify-between">
-                    Developer Platform
+                    {{ $t('AppHeader-api-developer-platform') }}
                     <span class="badge">New</span>
                   </a></li>
                 <li><a>API</a></li>
@@ -38,10 +38,10 @@
           </li>
           <li>
             <details>
-              <summary>LEADERBOARDS</summary>
+              <summary>{{ $t('AppHeader-LEADERBOARDS') }}</summary>
               <ul class="p-2">
-                <li><a>猫粮排行榜</a></li>
-                <li><a>Ranked</a></li>
+                <li><a>{{ $t('AppHeader-LEADERBOARDS-catfood') }}</a></li>
+                <li><a>{{ $t('AppHeader-LEADERBOARDS-ranked') }}</a></li>
               </ul>
             </details>
           </li>
@@ -53,7 +53,7 @@
         <el-autocomplete
               v-model="state"
               :fetch-suggestions="querySearchAsync"
-              placeholder="SearchPlayer"
+              :placeholder="$t('AppHeader-SearchPlayer')"
               @select="handleSelect"
               clearable="true"
       >
@@ -97,7 +97,7 @@
               d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z" />
           </svg>
         </label>
-        <RouterLink  class="btn" to="/login" :hidden="isLogin" :="isLogin1" >Login</RouterLink>
+        <RouterLink  class="btn" to="/login" :hidden="isLogin" :="isLogin1" >{{ $t('AppHeader-LOGIN') }}</RouterLink>
         <div class="dropdown dropdown-end" :hidden="!isLogin">
       <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
         <div class="w-10 rounded-full avatar-transition">
@@ -114,33 +114,33 @@
         tabindex="0"
         class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
         <li>
-          <RouterLink class="justify-between" :to=link+uid>
+          <RouterLink class="justify-between" :to="`/user/`+uid">
             <p class="text-xs" :style="{ color: isDeveloper ? 'pink' : '' }">{{ UserName }}</p>
-            <span class="badge">Profile</span>
+            <span class="badge">{{ $t('AppHeader-user-profile') }}</span>
           </RouterLink>
         </li>
         <li>
           <RouterLink class="justify-between" to="/cgi-bin/user/home">
-            <p class="text-xs" >UserHome</p>
+            <p class="text-xs" >{{ $t('AppHeader-user-userhome') }}</p>
             
           </RouterLink>
         </li>
         <li>
           <RouterLink class="justify-between" to="/cgi-bin/user/friend">
-            <p class="text-xs" >Friend</p>
+            <p class="text-xs" >{{ $t('AppHeader-user-friends') }}</p>
           </RouterLink>
         </li>
         <li>
           <RouterLink class="justify-between" to="/cgi-bin/user/friend">
-            <p class="text-xs" >Neko Club</p>
+            <p class="text-xs" >{{ $t('AppHeader-user-nekoclub') }}</p>
           </RouterLink>
         </li>
         <li>
           <RouterLink :to="settinglink">
-            <a>Settings</a>
+            <a>{{ $t('AppHeader-user-settings') }}</a>
           </RouterLink>
         </li>
-        <li><a v-on:click="Logout">Logout</a></li>
+        <li><a v-on:click="Logout">{{ $t('AppHeader-user-logout') }}</a></li>
       </ul>
     </div>
       </div>

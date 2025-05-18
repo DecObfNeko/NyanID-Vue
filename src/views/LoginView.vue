@@ -11,7 +11,7 @@
 </div>
     <div class="card w-full max-w-sm shrink-0 shadow-2xl">
       <div class="card-body footer-title">
-        <h2 class="text-2xl font-bold">Login NyanID</h2>
+        <h2 class="text-2xl font-bold">登录到 NyanID 通行证</h2>
         <fieldset class="fieldset">
           <label class="fieldset-label">Email</label>
           <input type="email" name="email" class="input" placeholder="Email" v-model="email" required />

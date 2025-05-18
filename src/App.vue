@@ -66,6 +66,7 @@ const closeFullScreen = () => {
 
           onMounted(() => {
             initialize();
+            
           
 
       });

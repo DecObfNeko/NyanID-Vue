@@ -3,7 +3,7 @@
     <div class="hero-content flex-col lg:flex-row-reverse">
       <div class="text-center lg:text-left">
         <p class="py-8 footer-title">
-          Find your NyanID Password ฅ(＞﹏＜) 
+          {{ $t('ForGotPwdView-title') }}
         </p>
       </div>
       <div class="flex w-full flex-col lg:flex-row">
@@ -11,21 +11,21 @@
   </div>
       <div class="card w-full max-w-sm shrink-0 shadow-2xl">
         <div class="card-body footer-title">
-          <h2 class="text-2xl font-bold">Forgot Password</h2>
+          <h2 class="text-2xl font-bold">{{ $t('ForGotPwdView-fgp') }}</h2>
           <fieldset class="fieldset">
-            <label class="fieldset-label">Email</label>
+            <label class="fieldset-label">{{ $t('ForGotPwdView-email') }}</label>
             <input type="email" name="email" class="input" placeholder="Email" required  v-model="email"/>
             <div role="alert" class="alert alert-error" v-show="!validateEmail(email) && email.length > 0">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
-              <span>Error!
+              <span>{{ $t('ForGotPwdView-err') }}
               <br />
-              The mailbox is malformed!</span>
+              {{ $t('ForGotPwdView-errmsg') }}</span>
             </div>
 
-            <div><RouterLink to="/login" class="link link-hover">Login Account</RouterLink>  <RouterLink to="/register" class="link link-hover">Register Now!</RouterLink> </div>
-            <button class="btn btn-neutral mt-4" @click="ForgotPwd">Reset Password</button>
+            <div><RouterLink to="/login" class="link link-hover">{{ $t('ForGotPwdView-login') }}</RouterLink>  <RouterLink to="/register" class="link link-hover">{{ $t('ForGotPwdView-reg') }}</RouterLink> </div>
+            <button class="btn btn-neutral mt-4" @click="ForgotPwd">{{ $t('ResetPwd-rrpwd') }}</button>
           </fieldset>
           
         </div>
@@ -76,11 +76,3 @@ const ForgotPwd = () => {
 }
 
 </script>
-
-
-<style scoped>
-
-
-
-
-</style>

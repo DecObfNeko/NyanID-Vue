@@ -271,12 +271,12 @@
                 <label class="fieldset-label card-title float-left" style="color: white;">NickName:</label>
                 <input v-model="newnickname" type="text" class="input float-left" :placeholder="nickname" />
           
-                  <h2 class="card-title" style="color: white;">Set your sign!</h2>
+                  <h2 class="card-title" style="color: white;">设置你的个性签名</h2>
                   <p >If you want to set your sign!</p>
                   <textarea v-model="newdescription" class="textarea textarea-bordered" :placeholder="description" clearable></textarea>
            
 
-                <button class="btn btn-neutral mt-4 w-25" :onclick="changeuserInfo">Sava</button>
+                <button class="btn btn-neutral mt-4 w-25" :onclick="changeuserInfo">保存</button>
               </fieldset>
             </div>            
           </div>
@@ -310,7 +310,7 @@
     </div>
 </template>
 
-<script setup>
+<script setup name="UserHomeSettingView">
 import { ref, nextTick, inject, onMounted } from 'vue';
 import VueCropper from 'vue-cropperjs';
 import 'cropperjs/dist/cropper.css';
