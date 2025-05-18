@@ -92,22 +92,22 @@ import { RouterLink } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 
+type SupportedLocale = 'en' | 'zh' | 'ja' | 'ko'
+
 const { t, locale, availableLocales } = useI18n()
 const router = useRouter()
 
-const currentLocale = ref(locale.value)
+const currentLocale = ref<SupportedLocale>(locale.value as SupportedLocale)
 
-const getLocaleName = (code) => {
-  const names = {
+const getLocaleName = (code: SupportedLocale) => {
+  const names: Record<SupportedLocale, string> = {
     en: 'English',
     zh: '中文',
     ja: '日本語',
     ko: '한국어'
-
   }
   return names[code] || code.toUpperCase()
 }
-
 
 const toasts = ref<Array<{ id: number, timer: ReturnType<typeof setTimeout> }>>([])
 const lang = ref({})
