@@ -13,115 +13,116 @@ import FightsView from '@/views/mc/FightsView.vue'
 import ResetPwd from '@/views/ResetPwd.vue'
 import E404 from '@/views/stt/E404.vue'
 
-import { createRouter, createWebHistory } from 'vue-router'
-
-
+import { createRouter, createWebHashHistory } from 'vue-router'
+import MainCommunityView from '@/views/Community/MainCommunityView.vue'
+import CommunityMarketView from '@/views/Community/CommunityMarketView.vue'
+import ManagerHomeView from '@/views/Admin/ManagerHomeView.vue'
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
-     {
-    path: '/:lang',
-    component: { template: '<router-view />' },
-    children: [
-      {
-      path: '',
+    {
+      path: '/',
       name: 'HomeView',
       component : HomeView,
       meta: { transition: 'fade-enter-active' },
     },
     {
-      path: 'PrivacyPolicy',
+      path: '/PrivacyPolicy',
       name: 'PrivacyPolicyView',
       component: PrivacyPolicyView
     },
     {
-      path: 'login',
+      path: '/login',
       name: 'LoginView',
       component: LoginView,
       meta: { transition: 'fade-leave-active' },
     },
     {
-      path: 'findpwd',
+      path: '/findpwd',
       name: 'ForgotPasswordView',
       component: ForGotPwdView,
       meta: { transition: 'fade-leave-active' },
     },
     {
-      path: 'register',
+      path: '/register',
       name: 'RegisterView',
       component: RegisterView,
       meta: { transition: 'fade-leave-active' },
     },
     {
-      path: 'verification/:token',
+      path: '/verification/:token',
       name: 'VerificationView',
       component: VerificationView,
       meta: { transition: 'fade-leave-active' },
     },
     {
-      path: 'user/:uuid',
+      path: '/user/:uuid',
       name: 'UserHomeView',
       component: UserHomeView,
       meta: { transition: 'fade-leave-active' },
     },
     {
-      path: 'user/setting',
+      path: '/user/setting',
       name: 'UserHomeSettingView',
       component: UserHomeSettingView,
       meta: { transition: 'fade-leave-active' },
     },
     {
-      path: 'tos',
+      path: '/tos',
       name: 'TeamOfServiceView',
       component: TermsOfServiceView,
       meta: { transition: 'fade-leave-active' },
     },
     {
-      path: 'server',
+      path: '/server',
       name: 'McServer',
       component: McServer,
       meta: { transition: 'fade-leave-active' },
     },
     {
-      path: 'aboutus',
+      path: '/aboutus',
       name: 'TeamView',
       component: TeamView,
       meta: { transition: 'fade-leave-active' },
     },
     {
-      path: 'match',
+      path: '/cgi-bin/:key/admin/:action',
+      name: 'ManagerHomeView',
+      component: ManagerHomeView,
+      meta: { transition: 'fade-leave-active' },
+    },
+    {
+      path: '/match',
       name: 'FightsView',
       component: FightsView,
     },
     {
-      path: 'resetpwd/:email',
+      path: '/cgi-bin/community',
+      name: 'Community',
+      component: MainCommunityView,
+      meta: { transition: 'fade-leave-active' },
+      children: [
+        {
+          path: '/cgi-bin/community/market',
+          name: 'CommunityMarket',
+          component: CommunityMarketView,
+          meta: { transition: 'fade-leave-active' },
+        }
+      ]
+    },
+    {
+      path: '/resetpwd',
       name: 'ResetPwd',
       component: ResetPwd,
       meta: { transition: 'fade-leave-active' },
     },
     {
-      path: ":pathMatch(.*)*",
+      path: "/:pathMatch(.*)*",
       name: "NotFound",
       component: E404,
     }
     ]
-  },
- { 
-  path: '/:pathMatch(.*)*', 
-  redirect: to => {
-    const lang = getDefaultLanguage()
-    const originalPath = to.path.startsWith(`/${lang}`) 
-      ? to.path 
-      : `/${lang}${to.path}`
-    return originalPath
-  }
-}
-    
-  ]
-})
-function getDefaultLanguage() {
-  const browserLang = navigator.language.split('-')[0]
-  return ['en', 'zh', 'ja', 'ko'].includes(browserLang) ? browserLang : 'zh'
-}
+  })
+
 export default router

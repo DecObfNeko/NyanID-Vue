@@ -9,7 +9,7 @@
     <div class="flex w-full flex-col lg:flex-row">
   <div class="divider lg:divider-horizontal"></div>
 </div>
-    <div class="card w-full max-w-sm shrink-0 shadow-2xl">
+    <div class="card w-full max-w-sm shrink-0 shadow-2xl bg-amber-50">
       <div class="card-body footer-title">
         <h2 class="text-2xl font-bold">Register NyanID</h2>
         <fieldset class="fieldset">
@@ -75,7 +75,7 @@ const validateEmail = (email: string) => {
 function Register() {
   register(username.value, password.value, email.value).then(res => {
   if (res.status === 200) {
-    open('Success', 'chenk your mailbox!', 'success')
+    open('Success', res.data.message, 'success')
   } else {
     open('Error', res.data.message, 'error')
   }

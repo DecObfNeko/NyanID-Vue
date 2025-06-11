@@ -15,7 +15,11 @@
                       The developer identity has been verified.
                   </p>
                   <img src="@/assets/img/dev.png" :hidden="!isDeveloper" class="w-4 h-4 translate-y-[-13px] translate-x-[0px] opacity-95 hover:opacity-100 transition-opacity" style=" -webkit-user-drag: none; -moz-user-drag: none; -ms-user-drag: none; -user-drag: none;" >
-                <p class="text-sm">个性签名: {{ description }}</p>
+                <p class="text-sm">==+= {{ description }} =+==</p>
+                  <p :hidden="!ViolationHistory" style="color: red;"class="text-sm"> 
+                      ✕此用户有{{ NACCount }}个记录在案的NAC封禁记录喵!!!✕
+                      {{ ViolationHistory ? '✕ Νeko ΑntiϹheat ✕':'' }}
+                  </p>
                 <p class="text-xs text-gray-500 mt-1">uid: {{uid}} · Username: {{ username }}</p>
                 <p class="text-xs text-gray-500 mt-1">Level: {{exp/2000}}</p>
 
@@ -47,6 +51,8 @@ const description = ref('')
 const uid = ref("")
 const exp = ref()
 const username = ref("")
+const ViolationHistory = ref()
+const NACCount = ref()
 const uuid = ref('')
 uuid.value = route.params.uuid as string
 
@@ -75,6 +81,8 @@ getPublicUserInfo(uuid.value).then(res => {
     uid.value = res.data.uid
     username.value = res.data.username
     exp.value = res.data.exp
+    NACCount.value = res.data.NACCOUNT
+    ViolationHistory.value = res.data.ViolationHistory
     fetchAvatar(res.data.uid)
   }else{
     open('Error', 'The user does not exist', 'error')

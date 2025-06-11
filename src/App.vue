@@ -1,6 +1,6 @@
 <template html>
   <div class="base-300 dark:bg-base-300" v-loading.fullscreen.lock="fullscreenLoading" 
-       element-loading-text="喵喵喵? 在加载呢杂鱼awa" type="primary">
+       element-loading-text="喵喵喵? 在加载呢杂鱼awa" type="primary" data-theme="cupcake">
     <AppHeader #="body" html data-theme="" :key="Refs"/> 
 
     <div style="height: 50px; opacity: 0;"></div>
@@ -27,8 +27,6 @@ import { getServerInfo } from '@/api/netcore.d'
 import Cookies from 'js-cookie';
 
 const Refs = ref(Cookies.get('LoginToken'))
-
-const isRouterActive = ref(true)
 
 const fullscreenLoading = ref(false)
 const openFullScreen = () => {

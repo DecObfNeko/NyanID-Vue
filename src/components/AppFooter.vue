@@ -1,7 +1,7 @@
 <template>
-<footer class="footer sm:footer-horizontal text-base-content p-10 glass fixed-bottom">
-  <aside>
-    <img src="@/assets/img/logo.png" class="w-16" />
+<footer class="footer sm:footer-horizontal text-base-content p-10 glass ">
+  <aside class="flex-col items-center">
+    <img src="@/assets/img/logo.png" class="w-16 flex-auto" />
     <p class="footer-title">
         NyaCat Cloud Software Studio.<br />
       <br />

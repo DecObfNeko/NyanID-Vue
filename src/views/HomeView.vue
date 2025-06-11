@@ -1,11 +1,9 @@
-<template>
-  <div>
-    
-    <div class="hero min-h-screen">
+<template>    
+    <div class="hero min-h-screen glass flex-auto">
       <div class="hero-content flex-col lg:flex-row-reverse">
         <img src="@/assets/img/3a614988d5e2c37ff40d29e232066f86.png" :class="['max-w-sm', { 'animate-fly-in': isMounted }]" style=" -webkit-user-drag: none; -moz-user-drag: none; -ms-user-drag: none; -user-drag: none;" />
         <div :class="[{ 'animate-fly-in': isMounted }]">
-          <h1 class="text-5xl font-bold" style="color: azure;">NyaCat Cloud</h1>
+          <h1 class="text-5xl font-bold" style="color: azure;">猫猫云开放通行证平台NyaCat Cloud</h1>
           <p class="py-6" style="color: azure;">
             Meet a better version of yourself ！
             <br>
@@ -44,7 +42,7 @@
               <div class="stat-value">{{ AllApplication }}</div>
             </div>
             <div class="stat place-items-center w-90">
-              <div class="stat-title">NumberOfEvents</div>
+              <div class="stat-title">NumberOfServerEvents</div>
               <span v-if="AllApplicationState" class="loading loading-ring loading-xl"></span>
               <div class="stat-value">{{ NumberOfEvents }}</div>
             </div>
@@ -52,9 +50,9 @@
         </div>
         </transition>
       </div>
+      
     </div>
-  </div>
-  
+    
 </template>
 
 
@@ -110,7 +108,7 @@ getServerInfo().then(res => {
     NumberOfEventsState.value = false;
   } else {
     open('Error',res.data,'error');
-    serverInfo.value = 'Server is down!';
+    serverInfo.value = '与后端服务器建立连接失败喵~';
 
     show.value = false;
     serverInfoState.value = false;

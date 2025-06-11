@@ -9,8 +9,8 @@ type SupportedLocale = 'en' | 'zh' | 'ja' | 'ko';
 
 const i18n = createI18n<{}, SupportedLocale>({
   legacy: false,
-  locale: 'en',
-  fallbackLocale: 'en',
+  locale: 'zh',
+  fallbackLocale: 'zh',
   messages
 });
 
