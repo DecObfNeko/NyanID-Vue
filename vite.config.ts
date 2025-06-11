@@ -10,6 +10,9 @@ export default defineConfig({
     vue(),
     tailwindcss(),
   ],
+  build: {//配置打包块大小
+    chunkSizeWarningLimit:6000,
+  },
   server: {
     allowedHosts: ['.nyanid.cn'],
     port: 2095

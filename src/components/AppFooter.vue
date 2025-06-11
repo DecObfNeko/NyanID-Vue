@@ -1,32 +1,47 @@
 <template>
-<footer class="footer sm:footer-horizontal text-base-content p-10 glass fixed-bottom">
-  <aside>
-    <img src="@/assets/img/logo.png" class="w-16" />
+<footer class="footer sm:footer-horizontal text-base-content p-10 glass ">
+  <aside class="flex-col items-center">
+    <img src="@/assets/img/logo.png" class="w-16 flex-auto" />
     <p class="footer-title">
         NyaCat Cloud Software Studio.<br />
       <br />
-      Copyleft 2018-2025 DecobfnekoDev LTD. All Rights Reserved.
+      {{ $t('AppFooter-cr') }} 2018-2025 DecobfnekoDev LTD. ©NyanCat Cloud
+      <br />
       <br />
     </p>
+    <div class="locale-changer">
+  </div>
   </aside>
   <figure>  
  
-   <button @click="ClickCat()">
+   <button @click="ClickCat()" >
     <p class="footer-title">
-    <img src="@/assets/img/9d29c274472bfd1e58bf4e7a2efb180f.png" class="w-40 animate-bounce" />
-        这是猫猫,你可以摸摸她awa
+    <img src="@/assets/img/9d29c274472bfd1e58bf4e7a2efb180f.png" class="w-40" />
+        {{ $t('AppFooter-clickcatmsg') }}
     </p>
    </button>
   </figure>
   <div class="divider divider-horizontal"></div>
 
   <nav>
-    <h6 class="footer-title">Services & Links</h6>
-    <RouterLink to="/aboutus" class="link link-hover">About Us</RouterLink>
-    <RouterLink to="/joinus" class="link link-hover">Join us</RouterLink>
-    <RouterLink to="/PrivacyPolicy" class="link link-hover">Privacy Policy</RouterLink>
-    <RouterLink to="/tos" class="link link-hover">Terms of Service</RouterLink>
-    <RouterLink to="/DMCA" class="link link-hover">DMCA</RouterLink>
+    <h6 class="footer-title">( •̀ ω •́ )✧{{ $t('AppFooter-Services') }}</h6>
+    <RouterLink to="/aboutus" class="link link-hover">⇒{{ $t('AppFooter-aboutus') }}</RouterLink>
+    <RouterLink to="/PrivacyPolicy" class="link link-hover">⇒{{ $t('AppFooter-pp') }}</RouterLink>
+    <RouterLink to="/tos" class="link link-hover">⇒{{ $t('AppFooter-tos') }}</RouterLink>
+    <RouterLink to="/DMCA" class="link link-hover">⇒{{ $t('AppFooter-dmca') }}</RouterLink>
+    <h8 class="footer-title">🌏{{ $t('AppFooter-switchLang') }}:</h8>
+      <select 
+    v-model="$i18n.locale"
+    class="select select-xs"
+  >
+    <option 
+      v-for="locale in availableLocales"
+      :key="locale"
+      :value="locale"
+    >
+      {{ getLocaleName(locale) }}
+    </option>
+  </select>
   </nav>
 
 
@@ -74,17 +89,35 @@ img {
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { RouterLink } from 'vue-router'
+import { useI18n } from 'vue-i18n'
+import { useRouter } from 'vue-router'
 
-// 使用内置的类型定义
+type SupportedLocale = 'en' | 'zh' | 'ja' | 'ko'
+
+const { t, locale, availableLocales } = useI18n()
+const router = useRouter()
+
+const currentLocale = ref<SupportedLocale>(locale.value as SupportedLocale)
+
+const getLocaleName = (code: SupportedLocale) => {
+  const names: Record<SupportedLocale, string> = {
+    en: 'English',
+    zh: '中文',
+    ja: '日本語',
+    ko: '한국어'
+  }
+  return names[code] || code.toUpperCase()
+}
+
 const toasts = ref<Array<{ id: number, timer: ReturnType<typeof setTimeout> }>>([])
+const lang = ref({})
 
 let toastId = 0
 let clickmsg = ref()
 
+
 function ClickCat() {
-    clickmsg.value = "喵喵喵~"
-
-
+  clickmsg.value = "喵喵喵~"
   const id = toastId++
   const timer = setTimeout(() => {
     closeToast(id)
