@@ -79,5 +79,12 @@
   </div>
 </div>
 
-
 </template>
+
+<script setup lang="ts">
+import { onMounted } from 'vue';
+
+onMounted  (() => {
+  document.title = 'NyanID | 服务政策'
+})
+</script>

@@ -119,6 +119,7 @@ const isMounted = ref(false)
 
 // 在组件挂载时设置 isMounted 为 true
 onMounted(() => {
+  document.title = 'NyaCat Cloud | ASIA'
   isMounted.value = true
 })
 </script>

@@ -35,7 +35,7 @@ import config from '@/config/configenv.d'
 import { useRouter, useRoute } from 'vue-router'
 import { ElNotification } from 'element-plus'
 import { getPublicUserInfo } from '@/api/netcore.d'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import axios from 'axios'
 import davatar from "@/assets/img/avatar.png"
 
@@ -56,8 +56,6 @@ const NACCount = ref()
 const uuid = ref('')
 uuid.value = route.params.uuid as string
 
-
-
 const fetchAvatar = async (uid: string) => {
   try {
     const response = await axios.get(`${config.apiUrl}/api/zako/res/avatar/${uid}`)
@@ -72,7 +70,6 @@ const fetchAvatar = async (uid: string) => {
 }
 
 getPublicUserInfo(uuid.value).then(res => {
-  
   if (res.status === 200) {
     avatarUrl.value = `${config.apiUrl}/api/zako/res/avatar/${res.data.uid}`
     UserName.value = res.data.nickname
@@ -80,6 +77,7 @@ getPublicUserInfo(uuid.value).then(res => {
     description.value = res.data.description
     uid.value = res.data.uid
     username.value = res.data.username
+    document.title = 'NyanID | ' + username.value
     exp.value = res.data.exp
     NACCount.value = res.data.NACCOUNT
     ViolationHistory.value = res.data.ViolationHistory

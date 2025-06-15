@@ -35,11 +35,12 @@ const open = (title: any, msg: any, type: any) => {
 
 
 onMounted(() => {
+  document.title = msg.value
   msg.value = "Verifying the legitimacy of your email address"
   token.value = route.params.token as string
   verification(token.value).then(res => {
     if (res.status === 200) {
-      msg.value = "Verifying.........................."
+      msg.value = "Verifying..."
       open('Success', 'Verification success', 'success')
       setTimeout(() => {
         router.push({ path: "/login" })

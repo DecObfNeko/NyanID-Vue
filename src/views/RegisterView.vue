@@ -39,7 +39,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { ElNotification } from 'element-plus'
 import Cookies from 'js-cookie'
@@ -53,6 +53,10 @@ const router = useRouter()
 
 // 检查是否存在 LoginToken，如果存在则跳转到主页
 const LoginToken = Cookies.get('LoginToken')
+
+onMounted(() => {
+    document.title = 'NyanID | 注册账户'
+})
 
 if (LoginToken) {
   open('Error', 'You are already logged in', 'error')

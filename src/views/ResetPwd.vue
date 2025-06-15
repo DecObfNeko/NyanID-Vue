@@ -31,7 +31,7 @@
 </template>
 
 <script setup lang="ts" name="ResetPwd">
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router'
 import { ResetPwd } from '@/api/netcore.d'
 import { ElNotification } from 'element-plus'
@@ -43,6 +43,10 @@ const pwd = ref('')
 const code = ref('')
 const ResetEmail = ref('')
 ResetEmail.value = route.params.email as string
+
+onMounted(() => {
+  document.title = 'NyanID | 重置密码'
+})
 
 const open = (title: any, msg: any, type: any) => {
   ElNotification({

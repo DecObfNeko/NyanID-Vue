@@ -13,3 +13,11 @@
   </div>
 </div>
 </template>
+
+<script setup lang="ts">
+import { onMounted } from 'vue';
+
+onMounted(() => {
+  document.title = 'NyanID | 404'
+})
+</script>

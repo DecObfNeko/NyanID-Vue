@@ -76,16 +76,7 @@
       @close="showDeviceModal = false"
       @delete="handleDeleteDevice"
     />  
-    
-    <!-- Yggdrasil账户组件 -->
-    <YggdrasilAccount
-      :visible="showYggdrasilAccount" 
-      :UUID="YggdrasilUUID"
-      :YggdrasilUrl="YggdrasilUrl"
-      :HasYggdrasilAcc="HasYggdrasilAccount"
-      @close="showYggdrasilAccount = false"
-      @openacc="openaccount"
-    />
+  
 
     <!-- 绑定Minecraft账户窗口 -->
     <el-dialog v-model="bindMinecraftVisible" title="绑定 Minecraft 账户" width="500">
@@ -313,11 +304,11 @@
               <label class="fieldset-label card-title " style="color: white;">重置头像:</label>
               <button class="btn btn-neutral flex-1" @click="avatarDialogVisible = true">Avatar</button>
 
-              <label class="fieldset-label card-title " style="color: white;">授权服务:</label>
-              <button class="btn btn-neutral flex-1" @click="authorizedVisible = true">Authorized Services</button>
+              <!-- label class="fieldset-label card-title " style="color: white;">授权服务:</label>
+              <button class="btn btn-neutral flex-1" @click="authorizedVisible = true">Authorized Services</button -->
 
               <label class="fieldset-label card-title " style="color: white;">Yggdrasil Account:</label>
-              <button class="btn btn-neutral flex-1" @click="showYggdrasilAccount = true; checkLoginToken()">外置登录账户设置</button>
+              <RouterLink class="btn btn-neutral flex-1" to="/cgi-bin/yggdrasil">外置登录账户设置</RouterLink>
 
               <label class="fieldset-label card-title " style="color: white;">登录设备管理:</label>
               <button class="btn btn-neutral flex-1" @click="showDeviceModal = true; DeviceList()">Device Management</button>    
@@ -328,8 +319,8 @@
               <label class="fieldset-label card-title " style="color: white;">2FA:</label>
               <button class="btn btn-neutral flex-1" @click="auth2Visible = true">登录二次验证</button>
 
-              <label class="fieldset-label card-title " style="color: red;">冻结账号:</label>
-              <button class="btn btn-neutral flex-1" style="color: red;" @click="freezeVisible = true">Freeze</button>
+              <!-- label class="fieldset-label card-title " style="color: red;">冻结账号:</label>
+              <button class="btn btn-neutral flex-1" style="color: red;" @click="freezeVisible = true">Freeze</button -->
             </div>
           </div>
         </fieldset>
@@ -346,7 +337,6 @@ import { useRouter } from 'vue-router'
 import { ElNotification, ElMessageBox } from 'element-plus'
 import eventBus from '@/utils/mitt.d'
 import DeviceManager from '@/components/DeviceManager.vue';
-import YggdrasilAccount from '@/components/YggdrasilAccount.vue';
 import { 
   SetNickName, 
   BindMCAccount, 
@@ -357,7 +347,6 @@ import {
   getUserDevices, 
   DeleteDevice,
   SwitchEnableGIFAvatar, 
-  OpenYggdrasilAccount, 
   getUserViolationHistory, 
   Open2fa, 
   Close2fa 
@@ -375,7 +364,6 @@ const violationVisible = ref(false)
 const freezeVisible = ref(false)
 const showFreezeConfirm = ref(false)
 const showDeviceModal = ref(false)
-const showYggdrasilAccount = ref(false)
 const showQRCode = ref(false)
 
 // 头像相关
@@ -394,9 +382,6 @@ const EnableGIFAvatar = ref(false)
 const IsGIFAvatar = ref(false)
 const AvatarID = ref('')
 const mcuid = ref('')
-const HasYggdrasilAccount = ref(false)
-const YggdrasilUUID = ref('')
-const YggdrasilUrl = ref('')
 const ViolationH = ref([])
 const isAdmin = ref(false)
 const akey = ref('')
@@ -420,6 +405,7 @@ const authorizedServices = ref([
 
 // 初始化检查登录状态
 onMounted(() => {
+  document.title = 'NyanID | 用户设置'
   checkLoginToken()
   Violation()
 })
@@ -440,14 +426,11 @@ function checkLoginToken() {
       IsGIFAvatar.value = res.data.IsGIFAvatar
       EnableGIFAvatar.value = res.data.EnableGIFAvatar
       AvatarID.value = res.data.AvatarID
-      HasYggdrasilAccount.value = res.data.HasYggdrasilAccount
-      YggdrasilUUID.value = res.data.YggdrasilUUID
       UserGroup.value = res.data.UserGroup
       isAdmin.value = res.data.isAdmin
       akey.value = res.data.akey
       Aaction.value = res.data.Aaction
       have2fa.value = res.data.have2fa
-      YggdrasilUrl.value = res.data.url
     } else {
       Cookies.remove('LoginToken')
       router.push('/login')
@@ -506,17 +489,6 @@ const CloseAccount2FA = () => {
   })
 }
 
-// 开启Yggdrasil账户
-const openaccount = () => {
-  OpenYggdrasilAccount(LoginToken).then(res => { 
-    if (res.status === 204) {
-      open('成功', '您的Yggdrasil账户已成功开启', 'success')
-      checkLoginToken()
-    } else {
-      open('错误', '开启Yggdrasil账户失败', 'error')
-    }
-  })
-}
 
 // 删除设备
 const DeleteDevices = (device) => {

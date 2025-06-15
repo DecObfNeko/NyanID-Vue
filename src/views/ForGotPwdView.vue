@@ -37,7 +37,7 @@
   
   
 <script setup lang="ts" name="ForgotPasswordView">
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { ForGotPwd } from '@/api/netcore.d'
 import { ElNotification } from 'element-plus'
 import { useRouter } from 'vue-router'
@@ -45,6 +45,10 @@ import { useRouter } from 'vue-router'
 const email = ref('')
 
 const router = useRouter()
+
+onMounted(() => {
+  document.title = 'NyanID | 忘记密码'
+})
 
 function open(title: any, msg: any, type: any) {
   ElNotification({

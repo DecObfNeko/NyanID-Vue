@@ -23,7 +23,11 @@
 </template>
 
 <script setup lang="ts" name="TeamView">
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
+
+onMounted(() => {
+document.title = 'NyanID | 关于我们'
+});
 
 const developers = ref([
   {
