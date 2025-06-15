@@ -17,6 +17,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import MainCommunityView from '@/views/Community/MainCommunityView.vue'
 import CommunityMarketView from '@/views/Community/CommunityMarketView.vue'
 import ManagerHomeView from '@/views/Admin/ManagerHomeView.vue'
+import YggdrasilView from '@/views/mc/YggdrasilView.vue'
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -90,6 +91,12 @@ const router = createRouter({
       path: '/cgi-bin/:key/admin/:action',
       name: 'ManagerHomeView',
       component: ManagerHomeView,
+      meta: { transition: 'fade-leave-active' },
+    },
+    {
+      path: '/cgi-bin/yggdrasil',
+      name: 'YggdrasilView',
+      component: YggdrasilView,
       meta: { transition: 'fade-leave-active' },
     },
     {

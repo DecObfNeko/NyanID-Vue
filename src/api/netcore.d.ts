@@ -267,6 +267,56 @@ export const SetAvatar = async (uuid, avatar) => {
     }
 };
 
+export const SetSkin = async (token, skin) => {
+    try {
+        const response = await axios ({
+            method: 'put',
+            url: `${config.apiUrl}/api/yggdrasil/textures/skin`,
+            headers: {
+                "Event": "Ua",
+                "Authorization": `Bearer ${token}`,
+                'Content-Type': 'multipart/form-data', 
+            },
+            data: skin 
+        });
+        return {
+            status: response.status,
+            data: response.data
+        };
+    } catch (error) {
+        console.error('Error fetching server info:', error);
+        return {
+            status: error.response ? error.response.status : 500,
+            data: error.response ? error.response.data : { message: 'Server not available' }
+        };
+    }
+};
+export const SetCape = async (token, cape) => {
+    try {
+        const response = await axios ({
+            method: 'put',
+            url: `${config.apiUrl}/api/yggdrasil/textures/cape`,
+            headers: {
+                "Event": "Ua",
+                "Authorization": `Bearer ${token}`,
+                'Content-Type': 'multipart/form-data', 
+            },
+            data: cape 
+        });
+        return {
+            status: response.status,
+            data: response.data
+        };
+    } catch (error) {
+        console.error('Error fetching server info:', error);
+        return {
+            status: error.response ? error.response.status : 500,
+            data: error.response ? error.response.data : { message: 'Server not available' }
+        };
+    }
+};
+
+
 export const SetUserName = async (Username,LoginToken) => {
     try {
         const response = await axios ({

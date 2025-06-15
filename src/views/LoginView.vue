@@ -63,6 +63,7 @@ const code = ref('')
 const Token = ref([])
 
 onMounted(() => {
+  document.title = 'NyanID | 登录'
 getUserInfo(LoginToken).then(res => {
   if (res.status === 200) {
     isLogin1.value = false
